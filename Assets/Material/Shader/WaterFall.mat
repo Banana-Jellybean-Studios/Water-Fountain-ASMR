@@ -56,16 +56,16 @@ Material:
     - _Transparency: 0.25
     - _TransparencyMask: 0
     - _VoroniAgitation: 1
-    - _VoroniPower: 5
-    - _VoroniScale: 10
+    - _VoroniPower: -0.55
+    - _VoroniScale: 12
     - _WoobbleAmount: 0.04
     - _WoobbleFrequency: 4
     - _WoobbleHeight: 1
     - _WoobbleSpeed: 16
     m_Colors:
-    - _BaseColor: {r: 0.17332679, g: 0.5621076, b: 0.8962264, a: 0}
+    - _BaseColor: {r: 0, g: 0.5280261, b: 1, a: 0}
     - _NormalsSpeed: {r: 0, g: 0.2, b: 0, a: 0}
-    - _VoroniColor: {r: 0, g: 0.2994864, b: 1.6743404, a: 0}
-    - _VoroniSpeed: {r: 0, g: 0.1, b: 0, a: 0}
+    - _VoroniColor: {r: 0, g: 0.21003968, b: 4.0649033, a: 0}
+    - _VoroniSpeed: {r: 0, g: 0.3, b: 0, a: 0}
     - _VoroniTiling: {r: 1.5, g: 0.2, b: 0, a: 0}
   m_BuildTextureStacks: []
