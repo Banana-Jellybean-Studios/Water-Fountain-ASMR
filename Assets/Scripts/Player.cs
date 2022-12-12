@@ -55,7 +55,7 @@ public class Player : MonoBehaviour
 			currentWoobbleSpeed = woobbleSpeedNormal;
 
 			//Waterfalls On Ground
-			currentSpeedOnGround = highVoroniSpeedOnGround;
+			currentSpeedOnGround = normalVoroniSpeedOnGround;
 		}
 
 		//Waterfalls
