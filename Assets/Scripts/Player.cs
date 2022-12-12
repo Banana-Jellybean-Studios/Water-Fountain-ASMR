@@ -5,6 +5,8 @@ using static UnityEditor.Progress;
 
 public class Player : MonoBehaviour
 {
+	[SerializeField] private float lerpSpeed = 5;
+
 	[Header("WaterfallsGround")]
 	[SerializeField] private List<GameObject> waterfallsGround;
 	[SerializeField] private float normalVoroniSpeedOnGround = 0.15f;
@@ -61,17 +63,17 @@ public class Player : MonoBehaviour
 		//Waterfalls
 		foreach (var item in waterfalls)
 		{
-			item.GetComponent<MeshRenderer>().material.SetVector("_VoroniSpeed", new Vector2(0, currentSpeed));
-			item.GetComponent<MeshRenderer>().material.SetFloat("_WoobbleAmount", currentWoobbleAmount);
-			item.GetComponent<MeshRenderer>().material.SetFloat("_WoobbleFrequancy", currentWoobbleFrequancy);
-			item.GetComponent<MeshRenderer>().material.SetFloat("_WoobbleHeight", currentWoobbleHeight);
-			item.GetComponent<MeshRenderer>().material.SetFloat("_WoobbleSpeed", currentWoobbleSpeed);
+			item.GetComponent<MeshRenderer>().material.SetVector("_VoroniSpeed", new Vector2(0, Mathf.Lerp(item.GetComponent<MeshRenderer>().material.GetVector("_VoroniSpeed").y, currentSpeed, lerpSpeed * Time.deltaTime)));
+			item.GetComponent<MeshRenderer>().material.SetFloat("_WoobbleAmount", Mathf.Lerp(item.GetComponent<MeshRenderer>().material.GetVector("_WoobbleAmount").y, currentWoobbleAmount, lerpSpeed * Time.deltaTime));
+			item.GetComponent<MeshRenderer>().material.SetFloat("_WoobbleFrequancy", Mathf.Lerp(item.GetComponent<MeshRenderer>().material.GetVector("_WoobbleFrequancy").y, currentWoobbleFrequancy, lerpSpeed * Time.deltaTime));
+			item.GetComponent<MeshRenderer>().material.SetFloat("_WoobbleHeight", Mathf.Lerp(item.GetComponent<MeshRenderer>().material.GetVector("_WoobbleHeight").y, currentWoobbleHeight, lerpSpeed * Time.deltaTime));
+			item.GetComponent<MeshRenderer>().material.SetFloat("_WoobbleSpeed", Mathf.Lerp(item.GetComponent<MeshRenderer>().material.GetVector("_WoobbleSpeed").y, currentWoobbleSpeed, lerpSpeed * Time.deltaTime));
 		}
 
 		//Waterfalls On Ground
 		foreach (var item in waterfallsGround)
 		{
-			item.GetComponent<MeshRenderer>().material.SetVector("_VoroniSpeed", new Vector2(0, currentSpeedOnGround));
+			item.GetComponent<MeshRenderer>().material.SetVector("_VoroniSpeed", new Vector2(0, Mathf.Lerp(item.GetComponent<MeshRenderer>().material.GetVector("_VoroniSpeed").y, currentSpeedOnGround, lerpSpeed * Time.deltaTime)));
 		}
 	}
 }
