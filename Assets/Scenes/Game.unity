@@ -528,6 +528,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b51a8ea377a4dbd40a8bb4c7de08bdb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waterfallsGround:
+  - {fileID: 4256610903453121874}
+  - {fileID: 1029467469}
+  normalVoroniSpeedOnGround: 0.15
+  highVoroniSpeedOnGround: 0.3
   waterfalls:
   - {fileID: 1161173702}
   - {fileID: 324065630}
@@ -634,7 +639,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.21145493, y: -0.49058443, z: 0.12396871, w: 0.836209}
-  m_LocalPosition: {x: 28.75, y: 20.17, z: -11.04}
+  m_LocalPosition: {x: 36.46, y: 24.94, z: -15.35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -771,6 +776,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 997475444}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1029467469 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4256610903453121874, guid: 3362ab4c10d465b4e9266e8d937625c5,
+    type: 3}
+  m_PrefabInstance: {fileID: 2130764370}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1161173702 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2991165157342145703, guid: 3362ab4c10d465b4e9266e8d937625c5,
@@ -870,12 +881,12 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   colorGradientTexture: {fileID: 0}
   shallowColor: {r: 0, g: 0.6313726, b: 1, a: 1}
-  deepColor: {r: 0, g: 0.4274456, b: 0.6784314, a: 1}
+  deepColor: {r: 0, g: 0.42744496, b: 0.6784314, a: 1}
   colorDepth: 2.59
-  horizonColor: {r: 0, g: 0.2274456, b: 0.8, a: 1}
+  horizonColor: {r: 0, g: 0.22744498, b: 0.8, a: 1}
   horizonDistance: 20
   shoreFade: 0
-  shoreColor: {r: 0, g: 0.98039216, b: 0.3019554, a: 0}
+  shoreColor: {r: 0, g: 0.98039216, b: 0.30195475, a: 0}
   shoreStrength: 0
   shoreBlend: 0
   shoreDepth: 0
@@ -1258,6 +1269,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4746281687648268702, guid: d38b9e70f1904074aa7128b41e7284a9,
     type: 3}
   m_PrefabInstance: {fileID: 6482694334337032794}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4256610903453121874 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4256610903453121874, guid: 3362ab4c10d465b4e9266e8d937625c5,
+    type: 3}
+  m_PrefabInstance: {fileID: 2123550422}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6482694334337032794
 PrefabInstance:
