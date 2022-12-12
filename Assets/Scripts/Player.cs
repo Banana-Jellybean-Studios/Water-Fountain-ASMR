@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 using static UnityEditor.Progress;
 
 public class Player : MonoBehaviour
 {
-	[SerializeField] private float lerpSpeed = 5;
+	[SerializeField] private float lerpTime = 0.3f;
 
 	[Header("WaterfallsGround")]
 	[SerializeField] private List<GameObject> waterfallsGround;
@@ -20,8 +21,8 @@ public class Player : MonoBehaviour
 	[SerializeField] private float highVoroniSpeed = 0.6f;
 	[SerializeField] private float woobbleAmountNormal = 0;
 	[SerializeField] private float woobbleAmountHigh = 0.1f;
-	[SerializeField] private float woobbleFrequancyNormal = 0;
-	[SerializeField] private float woobbleFrequancyHigh = 0.1f;
+	[SerializeField] private float woobbleFrequencyNormal = 0;
+	[SerializeField] private float woobbleFrequencyHigh = 0.1f;
 	[SerializeField] private float woobbleHeightNormal = 0;
 	[SerializeField] private float woobbleHeightHigh = 0.1f;
 	[SerializeField] private float woobbleSpeedNormal = 0;
@@ -29,7 +30,7 @@ public class Player : MonoBehaviour
 
 	private float currentSpeed;
 	private float currentWoobbleAmount;
-	private float currentWoobbleFrequancy;
+	private float currentWoobbleFrequency;
 	private float currentWoobbleHeight;
 	private float currentWoobbleSpeed;
 
@@ -40,7 +41,7 @@ public class Player : MonoBehaviour
 			//Waterfalls
 			currentSpeed = highVoroniSpeed;
 			currentWoobbleAmount = woobbleAmountHigh;
-			currentWoobbleFrequancy = woobbleFrequancyHigh;
+			currentWoobbleFrequency = woobbleFrequencyHigh;
 			currentWoobbleHeight = woobbleHeightHigh;
 			currentWoobbleSpeed = woobbleSpeedHigh;
 
@@ -52,7 +53,7 @@ public class Player : MonoBehaviour
 			//Waterfalls
 			currentSpeed = normalVoroniSpeed;
 			currentWoobbleAmount = woobbleAmountNormal;
-			currentWoobbleFrequancy = woobbleFrequancyNormal;
+			currentWoobbleFrequency = woobbleFrequencyNormal;
 			currentWoobbleHeight = woobbleHeightNormal;
 			currentWoobbleSpeed = woobbleSpeedNormal;
 
@@ -63,17 +64,17 @@ public class Player : MonoBehaviour
 		//Waterfalls
 		foreach (var item in waterfalls)
 		{
-			item.GetComponent<MeshRenderer>().material.SetVector("_VoroniSpeed", new Vector2(0, Mathf.Lerp(item.GetComponent<MeshRenderer>().material.GetVector("_VoroniSpeed").y, currentSpeed, lerpSpeed * Time.deltaTime)));
-			item.GetComponent<MeshRenderer>().material.SetFloat("_WoobbleAmount", Mathf.Lerp(item.GetComponent<MeshRenderer>().material.GetVector("_WoobbleAmount").y, currentWoobbleAmount, lerpSpeed * Time.deltaTime));
-			item.GetComponent<MeshRenderer>().material.SetFloat("_WoobbleFrequancy", Mathf.Lerp(item.GetComponent<MeshRenderer>().material.GetVector("_WoobbleFrequancy").y, currentWoobbleFrequancy, lerpSpeed * Time.deltaTime));
-			item.GetComponent<MeshRenderer>().material.SetFloat("_WoobbleHeight", Mathf.Lerp(item.GetComponent<MeshRenderer>().material.GetVector("_WoobbleHeight").y, currentWoobbleHeight, lerpSpeed * Time.deltaTime));
-			item.GetComponent<MeshRenderer>().material.SetFloat("_WoobbleSpeed", Mathf.Lerp(item.GetComponent<MeshRenderer>().material.GetVector("_WoobbleSpeed").y, currentWoobbleSpeed, lerpSpeed * Time.deltaTime));
+			item.GetComponent<MeshRenderer>().material.DOVector(new Vector2(0, currentSpeed), "_VoroniSpeed", lerpTime);
+			item.GetComponent<MeshRenderer>().material.DOFloat(currentWoobbleAmount, "_WoobbleAmount", lerpTime);
+			item.GetComponent<MeshRenderer>().material.DOFloat(currentWoobbleFrequency, "_WoobbleFrequency", lerpTime);
+			item.GetComponent<MeshRenderer>().material.DOFloat(currentWoobbleHeight, "_WoobbleHeight", lerpTime);
+			item.GetComponent<MeshRenderer>().material.DOFloat(currentWoobbleSpeed, "_WoobbleSpeed", lerpTime);
 		}
 
 		//Waterfalls On Ground
 		foreach (var item in waterfallsGround)
 		{
-			item.GetComponent<MeshRenderer>().material.SetVector("_VoroniSpeed", new Vector2(0, Mathf.Lerp(item.GetComponent<MeshRenderer>().material.GetVector("_VoroniSpeed").y, currentSpeedOnGround, lerpSpeed * Time.deltaTime)));
+			item.GetComponent<MeshRenderer>().material.DOVector(new Vector2(0, currentSpeedOnGround), "_VoroniSpeed", lerpTime);
 		}
 	}
 }
