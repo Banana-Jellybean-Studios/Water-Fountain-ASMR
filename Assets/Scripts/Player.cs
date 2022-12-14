@@ -3,78 +3,39 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using static UnityEditor.Progress;
+using PathCreation;
 
 public class Player : MonoBehaviour
 {
-	[SerializeField] private float lerpTime = 0.3f;
+	[SerializeField] private PathCreator creator;
+	[SerializeField] private GameObject waterBall;
+	[SerializeField] private float spawnDistance = 0.2f;
+	[SerializeField] private float spawnScaleMin = 0.3f;
+	[SerializeField] private float spawnScaleMax = 1f;
+	[SerializeField] private float speed = 1;
+	private float distance = 0;
 
-	[Header("WaterfallsGround")]
-	[SerializeField] private List<GameObject> waterfallsGround;
-	[SerializeField] private float normalVoroniSpeedOnGround = 0.15f;
-	[SerializeField] private float highVoroniSpeedOnGround = 0.3f;
+	private List<GameObject> balls;
 
-	private float currentSpeedOnGround;
+	private void Start()
+	{
+		balls = new List<GameObject>();
 
-	[Header("Waterfalls")]
-	[SerializeField] private List<GameObject> waterfalls;
-	[SerializeField] private float normalVoroniSpeed = 0.3f;
-	[SerializeField] private float highVoroniSpeed = 0.6f;
-	[SerializeField] private float woobbleAmountNormal = 0;
-	[SerializeField] private float woobbleAmountHigh = 0.1f;
-	[SerializeField] private float woobbleFrequencyNormal = 0;
-	[SerializeField] private float woobbleFrequencyHigh = 0.1f;
-	[SerializeField] private float woobbleHeightNormal = 0;
-	[SerializeField] private float woobbleHeightHigh = 0.1f;
-	[SerializeField] private float woobbleSpeedNormal = 0;
-	[SerializeField] private float woobbleSpeedHigh = 0.1f;
-
-	private float currentSpeed;
-	private float currentWoobbleAmount;
-	private float currentWoobbleFrequency;
-	private float currentWoobbleHeight;
-	private float currentWoobbleSpeed;
+		for (float i = 0; i < creator.path.length; i+=spawnDistance)
+		{
+			GameObject spawned = Instantiate(waterBall, creator.path.GetPointAtDistance(i), Quaternion.identity);
+			spawned.transform.localScale = Vector3.one * Random.Range(spawnScaleMin, spawnScaleMax);
+			balls.Add(spawned);
+		}
+	}
 
 	private void Update()
-    {
-        if (Input.touchCount > 0)
-        {
-			//Waterfalls
-			currentSpeed = highVoroniSpeed;
-			currentWoobbleAmount = woobbleAmountHigh;
-			currentWoobbleFrequency = woobbleFrequencyHigh;
-			currentWoobbleHeight = woobbleHeightHigh;
-			currentWoobbleSpeed = woobbleSpeedHigh;
+	{
+		distance += speed * Time.deltaTime;
 
-			//Waterfalls On Ground
-			currentSpeedOnGround = highVoroniSpeedOnGround;
-		}
-        else
+		for (int i = 0; i < balls.Count; i++)
 		{
-			//Waterfalls
-			currentSpeed = normalVoroniSpeed;
-			currentWoobbleAmount = woobbleAmountNormal;
-			currentWoobbleFrequency = woobbleFrequencyNormal;
-			currentWoobbleHeight = woobbleHeightNormal;
-			currentWoobbleSpeed = woobbleSpeedNormal;
-
-			//Waterfalls On Ground
-			currentSpeedOnGround = normalVoroniSpeedOnGround;
-		}
-
-		//Waterfalls
-		foreach (var item in waterfalls)
-		{
-			item.GetComponent<MeshRenderer>().material.DOVector(new Vector2(0, currentSpeed), "_VoroniSpeed", lerpTime);
-			item.GetComponent<MeshRenderer>().material.DOFloat(currentWoobbleAmount, "_WoobbleAmount", lerpTime);
-			item.GetComponent<MeshRenderer>().material.DOFloat(currentWoobbleFrequency, "_WoobbleFrequency", lerpTime);
-			item.GetComponent<MeshRenderer>().material.DOFloat(currentWoobbleHeight, "_WoobbleHeight", lerpTime);
-			item.GetComponent<MeshRenderer>().material.DOFloat(currentWoobbleSpeed, "_WoobbleSpeed", lerpTime);
-		}
-
-		//Waterfalls On Ground
-		foreach (var item in waterfallsGround)
-		{
-			item.GetComponent<MeshRenderer>().material.DOVector(new Vector2(0, currentSpeedOnGround), "_VoroniSpeed", lerpTime);
+			balls[i].transform.position = creator.path.GetPointAtDistance(i * spawnDistance + distance);
 		}
 	}
 }
