@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: WaterFall
-  m_Shader: {fileID: -6465566751694194690, guid: ec663a0632547164380b57b4ae7a82ad,
+  m_Shader: {fileID: -6465566751694194690, guid: cbf1fd4aadebf0c44b57528c90aad6cc,
     type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -63,10 +63,10 @@ Material:
     - _WoobbleHeight: 1
     - _WoobbleSpeed: 16
     m_Colors:
-    - _BaseColor: {r: 0, g: 0.5280261, b: 1, a: 0}
+    - _BaseColor: {r: 0.2971698, g: 0.6692564, b: 1, a: 0}
     - _BaseColor_1: {r: 0, g: 0.6431373, b: 3.090196, a: 0}
     - _NormalsSpeed: {r: 0, g: 0.2, b: 0, a: 0}
-    - _VoroniColor: {r: 0, g: 0.21003968, b: 4.0649033, a: 0}
+    - _VoroniColor: {r: 0, g: 0.47121942, b: 2.0324519, a: 0}
     - _VoroniSpeed: {r: 0, g: 0.3, b: 0, a: 0}
     - _VoroniTiling: {r: 1.5, g: 0.2, b: 0, a: 0}
   m_BuildTextureStacks: []
