@@ -16,7 +16,28 @@ public class Player : MonoBehaviour
 		public List<GameObject> objects;
 	}
 
+
+	[Header("Stats")]
 	public float money = 0;
+	public int addLevel = 1;
+	public int mergeLevel = 1;
+	public int incomeLevel = 1;
+
+	[Header("Level Increase Counts")]
+	public float incomeIncreaseByLevel = 0.5f;
+
+	[Header("Level Money Counts")]
+	public float addMoneyByLevel = 50;
+	public float mergeMoneyByLevel = 50;
+	public float incomeMoneyByLevel = 50;
+
+	//Current Level Counts
+	private float currentMoneyIncrease = 1;
+
+	//Current Money Counts
+	private float currentAddLevelMoney = 50;
+	private float currentMergeLevelMoney = 50;
+	private float currentIncomeLevelMoney = 50;
 
 	public List<Level> levelObjects;
 	public List<GameObject> boruSetleri;
@@ -24,7 +45,6 @@ public class Player : MonoBehaviour
 	public GameObject moneyTextEffect;
 	public TextMeshProUGUI moneyText;
 
-	public int currentLevel = 1;
 	public float timeIntervalPlus = 2;
 	public float timeIntervalForEach = 1.0f;
 
@@ -37,8 +57,8 @@ public class Player : MonoBehaviour
 
 	private void Start()
 	{
-		currentLevel = 1;
-		CheckLevel();
+		addLevel = 1;
+		CheckLevels();
 	}
 
 	private void Update()
@@ -47,7 +67,7 @@ public class Player : MonoBehaviour
 		{
 			StopAllCoroutines();
 			StartCoroutine(FlowWater());
-			flowTime = Time.time + timeIntervalPlus + timeIntervalForEach * currentLevel;
+			flowTime = Time.time + timeIntervalPlus + timeIntervalForEach * addLevel;
 		}
 
 		moneyText.text = TextedMoney(money).ToString();
@@ -62,7 +82,7 @@ public class Player : MonoBehaviour
 			levelObjects[i].particleSystem.Stop();
 		}
 
-		for (int i = currentLevel - 1; i > -1; i--)
+		for (int i = addLevel - 1; i > -1; i--)
 		{
 			levelObjects[i].particleSystem.Play();
 			Instantiate(moneyTextEffect, levelObjects[i].moneyTextEffectPos.transform.position, Quaternion.Euler(0, -90, 0)).GetComponent<TextMeshPro>().text = "$" + TextedMoney(moneyAmount).ToString();
@@ -74,15 +94,22 @@ public class Player : MonoBehaviour
 		yield return new WaitForSeconds(timeIntervalPlus);
 	}
 
-	public void LevelUp()
+	public void AddFountain()
 	{
-		currentLevel++;
-		CheckLevel();
+		addLevel++;
+		CheckLevels();
 	}
 
-	[ContextMenu("CheckLevel")]
-	private void CheckLevel()
+	private void CheckLevels()
 	{
+		//Level Money Counts
+		currentIncomeLevelMoney = 0;
+		for (int i = 0; i < incomeLevel + 1; i++)
+		{
+			currentIncomeLevelMoney += (incomeLevel + 1) * incomeMoneyByLevel;
+		}
+		
+		//Add Level
 		for (int i = 0; i < levelObjects.Count; i++)
 		{
 			for (int j = 0; j < levelObjects[i].objects.Count; j++)
@@ -91,7 +118,7 @@ public class Player : MonoBehaviour
 			}
 		}
 
-		for (int i = 0; i < currentLevel; i++)
+		for (int i = 0; i < addLevel; i++)
 		{
 			for (int j = 0; j < levelObjects[i].objects.Count; j++)
 			{
@@ -105,7 +132,26 @@ public class Player : MonoBehaviour
 			boruSetleri[i].SetActive(false);
 		}
 
-		boruSetleri[currentLevel - 1].SetActive(true);
+		boruSetleri[addLevel - 1].SetActive(true);
+
+		//Merge
+
+
+		//Income
+		currentMoneyIncrease = incomeLevel * incomeIncreaseByLevel + incomeIncreaseByLevel;
+
+	}
+
+	public void BuyIncomeUpgrade()
+	{
+		if (money >= currentIncomeLevelMoney)
+		{
+			incomeLevel++;
+			money -= currentIncomeLevelMoney;
+			//Vibrate();
+			CheckLevels();
+		}
+		//Save();
 	}
 
 	/*
