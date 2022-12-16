@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 using DG.Tweening;
 using PathCreation;
+using TMPro;
 
 public class Player : MonoBehaviour
 {
@@ -10,17 +12,28 @@ public class Player : MonoBehaviour
 	public struct Level
 	{
 		public ParticleSystem particleSystem;
+		public GameObject moneyTextEffectPos;
 		public List<GameObject> objects;
 	}
 
+	public float money = 0;
+
 	public List<Level> levelObjects;
 	public List<GameObject> boruSetleri;
+
+	public GameObject moneyTextEffect;
+	public TextMeshProUGUI moneyText;
 
 	public int currentLevel = 1;
 	public float timeIntervalPlus = 2;
 	public float timeIntervalForEach = 1.0f;
 
 	private float flowTime = 0;
+
+	private float TextedMoney(float money)
+	{
+		return (float)Math.Round((decimal)money, 2);
+	}
 
 	private void Start()
 	{
@@ -36,10 +49,14 @@ public class Player : MonoBehaviour
 			StartCoroutine(FlowWater());
 			flowTime = Time.time + timeIntervalPlus + timeIntervalForEach * currentLevel;
 		}
+
+		moneyText.text = TextedMoney(money).ToString();
 	}
 
 	private IEnumerator FlowWater()
 	{
+		float moneyAmount = 5;
+
 		for (int i = 0; i < levelObjects.Count; i++)
 		{
 			levelObjects[i].particleSystem.Stop();
@@ -47,8 +64,9 @@ public class Player : MonoBehaviour
 
 		for (int i = currentLevel - 1; i > -1; i--)
 		{
-			Debug.Log(levelObjects[i].particleSystem.name);
 			levelObjects[i].particleSystem.Play();
+			Instantiate(moneyTextEffect, levelObjects[i].moneyTextEffectPos.transform.position, Quaternion.Euler(0, -90, 0)).GetComponent<TextMeshPro>().text = "$" + TextedMoney(moneyAmount).ToString();
+			money += moneyAmount;
 			yield return new WaitForSeconds(timeIntervalForEach);
 			levelObjects[i].particleSystem.Stop();
 		}
