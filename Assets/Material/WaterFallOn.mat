@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WaterFall
+  m_Name: WaterFallOn
   m_Shader: {fileID: -6465566751694194690, guid: cbf1fd4aadebf0c44b57528c90aad6cc,
     type: 3}
   m_ValidKeywords: []

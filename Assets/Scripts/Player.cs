@@ -5,6 +5,7 @@ using System;
 using DG.Tweening;
 using PathCreation;
 using TMPro;
+using Unity.VisualScripting;
 
 public class Player : MonoBehaviour
 {
@@ -29,9 +30,15 @@ public class Player : MonoBehaviour
 	}
 
 	public List<FountainSet> fountainSets;
+	public Transform camera;
+
+	[Header("Rotate")]
+	public GameObject rotatingObj;
+	public Rigidbody rb;
+	[SerializeField] private float rotateSpeed = 10;
 
 	private int openFountainCount;
-	private Fountain currentFountain;
+	private FountainSet currentFountainSet;
 
 	[Header("Stats")]
 	public float money = 0;
@@ -83,8 +90,17 @@ public class Player : MonoBehaviour
 	public float shaderOffEndValue = 0;
 	public float shaderOffTransitionSeconds = 1f;
 
+	[Header("Effect")]
 	public GameObject moneyTextEffect;
-	public TextMeshProUGUI moneyText;
+
+	[Header("UI")]
+	public TextMeshProUGUI haveMoneyText;
+	public TextMeshProUGUI addMoneyText;
+	public TextMeshProUGUI speedMoneyText;
+	public TextMeshProUGUI incomeMoneyText;
+	public TextMeshProUGUI addLevelText;
+	public TextMeshProUGUI speedLevelText;
+	public TextMeshProUGUI incomeLevelText;
 
 	private float flowTime = 0;
 	private bool flowed = true;
@@ -100,9 +116,9 @@ public class Player : MonoBehaviour
 	    speedLevel = 1;
 	    incomeLevel = 1;
 
-		CheckLevels();
+		Load();
 
-		//Load();
+		CheckLevels();
 	}
 
 	private void Update()
@@ -116,7 +132,21 @@ public class Player : MonoBehaviour
 		if (Input.touchCount != 0) currentSpeed = currentSpeedNormal * fastSpeedFactorOnTouch;
 		else currentSpeed = currentSpeedNormal;
 
-		moneyText.text = TextedMoney(money).ToString();
+		haveMoneyText.text = TextedMoney(money).ToString();
+	}
+
+	private void FixedUpdate()
+	{
+		if (Input.touchCount != 0)
+		{
+			var touch = Input.GetTouch(0);
+
+			if (touch.phase == TouchPhase.Moved)
+			{
+				rb.AddTorque(0, touch.deltaPosition.x * -rotateSpeed, 0);
+				rotatingObj.transform.rotation = rb.transform.rotation;
+			}
+		}
 	}
 
 	private IEnumerator FlowWater()
@@ -127,15 +157,17 @@ public class Player : MonoBehaviour
 		for (int i = openFountainCount - 1; i > -1; i--)
 		{
 			//Shader On
-			MeshRenderer meshFlow = currentFountain.flowObj.GetComponent<MeshRenderer>();
+			MeshRenderer meshFlow = currentFountainSet.fountains[i].flowObj.GetComponent<MeshRenderer>();
 			meshFlow.material = waterfallOnMat;
 			meshFlow.material.SetFloat("_ProgressBorder", shaderOnStartValue);
 			meshFlow.material.DOFloat(shaderOnEndValue, "_ProgressBorder", shaderOnTransitionSeconds / currentSpeed);
 
-			currentFountain.flowGroundObj.SetActive(true);
+			currentFountainSet.fountains[i].flowGroundObj.SetActive(true);
 
 			//Money
-			Instantiate(moneyTextEffect, currentFountain.moneyTextEffectPos.transform.position, Quaternion.Euler(0, -90, 0)).GetComponent<TextMeshPro>().text = "$" + TextedMoney(moneyAmount).ToString();
+			GameObject moneyObj = Instantiate(moneyTextEffect, currentFountainSet.fountains[i].moneyTextEffectPos.transform.position, Quaternion.Euler(0, -90, 0));
+			moneyObj.GetComponent<TextMeshPro>().text = "$" + TextedMoney(moneyAmount).ToString();
+			moneyObj.transform.rotation = camera.transform.rotation;
 			money += moneyAmount;
 
 			//Wait
@@ -146,22 +178,22 @@ public class Player : MonoBehaviour
 			meshFlow.material.SetFloat("_ProgressBorder", shaderOffStartValue);
 			meshFlow.material.DOFloat(shaderOffEndValue, "_ProgressBorder", shaderOffTransitionSeconds / currentSpeed);
 
-			currentFountain.flowGroundObj.SetActive(false);
+			currentFountainSet.fountains[i].flowGroundObj.SetActive(false);
 		}
 
 		//Pipe On Shader
-		MeshRenderer meshPipe = currentFountain.pipeInnerObj.GetComponent<MeshRenderer>();
+		MeshRenderer meshPipe = currentFountainSet.fountains[openFountainCount - 1].pipeInnerObj.GetComponent<MeshRenderer>();
 		meshPipe.material = pipeOnMat;
-		meshPipe.material.SetFloat("_Fill", currentFountain.pipeOnShaderStartValue);
-		meshPipe.material.DOFloat(currentFountain.pipeOnShaderEndValue, "_Fill", currentFountain.pipeOnShaderTransitionSeconds / currentSpeed);
+		meshPipe.material.SetFloat("_Fill", currentFountainSet.fountains[openFountainCount - 1].pipeOnShaderStartValue);
+		meshPipe.material.DOFloat(currentFountainSet.fountains[openFountainCount - 1].pipeOnShaderEndValue, "_Fill", currentFountainSet.fountains[openFountainCount - 1].pipeOnShaderTransitionSeconds / currentSpeed);
 
 		//Wait
-		yield return new WaitForSeconds(currentFountain.pipeOnShaderTransitionSeconds / currentSpeed);
+		yield return new WaitForSeconds(currentFountainSet.fountains[openFountainCount - 1].pipeOnShaderTransitionSeconds / currentSpeed);
 
 		//Pipe Off Shader
 		meshPipe.material = pipeOffMat;
-		meshPipe.material.SetFloat("_Fill", currentFountain.pipeOffShaderStartValue);
-		meshPipe.material.DOFloat(currentFountain.pipeOffShaderEndValue, "_Fill", currentFountain.pipeOffShaderTransitionSeconds / currentSpeed);
+		meshPipe.material.SetFloat("_Fill", currentFountainSet.fountains[openFountainCount - 1].pipeOffShaderStartValue);
+		meshPipe.material.DOFloat(currentFountainSet.fountains[openFountainCount - 1].pipeOffShaderEndValue, "_Fill", currentFountainSet.fountains[openFountainCount - 1].pipeOffShaderTransitionSeconds / currentSpeed);
 
 		//Flow Finish
 		flowed = true;
@@ -174,9 +206,24 @@ public class Player : MonoBehaviour
 		currentSpeedLevelMoney = speedLevel * speedMoneyByLevel;
 		currentIncomeLevelMoney = incomeLevel * incomeMoneyByLevel;
 
+		addMoneyText.text = TextedMoney(currentFountainLevelMoney).ToString();
+		speedMoneyText.text = TextedMoney(currentSpeedLevelMoney).ToString();
+		incomeMoneyText.text = TextedMoney(currentIncomeLevelMoney).ToString();
+		addLevelText.text = fountainLevel.ToString();
+		speedLevelText.text = speedLevel.ToString();
+		incomeLevelText.text = incomeLevel.ToString();
+
 		//Current Fountain Level
-		int checkLevel = 0;
+		int checkLevel = 1;
 		bool isChecked = false;
+
+		for (int i = 0; i < fountainSets.Count; i++)
+		{
+			for (int j = 0; j < fountainSets[i].fountains.Count; j++)
+			{
+				fountainSets[i].fountains[j].objects[0].SetActive(false);
+			}
+		}
 
 		for (int i = 0; i < fountainSets.Count; i++)
 		{
@@ -184,7 +231,7 @@ public class Player : MonoBehaviour
 			{
 				if (fountainLevel <= checkLevel)
 				{
-					currentFountain = fountainSets[i].fountains[j];
+					currentFountainSet = fountainSets[i];
 					openFountainCount = j + 1;
 					isChecked = true;
 					break;
@@ -198,6 +245,19 @@ public class Player : MonoBehaviour
 			if (isChecked) break;
 		}
 
+		for (int i = 0; i < fountainSets.Count; i++)
+		{
+			for (int j = 0; j < fountainSets[i].fountains.Count; j++)
+			{
+				fountainSets[i].fountains[j].objects[0].SetActive(false);
+			}
+		}
+
+		for (int i = 0; i < openFountainCount; i++)
+		{
+			currentFountainSet.fountains[i].objects[0].SetActive(true);
+		}
+
 		//Pipe
 		for (int i = 0; i < fountainSets.Count; i++)
 		{
@@ -207,7 +267,7 @@ public class Player : MonoBehaviour
 			}
 		}
 
-		currentFountain.pipe.SetActive(true);
+		currentFountainSet.fountains[openFountainCount - 1].pipe.SetActive(true);
 
 		//Speed
 		currentSpeedNormal = speedStartCount + speedIncreaseByLevel * (speedLevel - 1);
@@ -215,6 +275,7 @@ public class Player : MonoBehaviour
 		//Income
 		currentMoneyIncrease = incomeStartCount + incomeIncreaseByLevel * (incomeLevel - 1);
 
+		Save();
 	}
 
 	public void BuyFountainUpgrade()
@@ -251,5 +312,36 @@ public class Player : MonoBehaviour
 			CheckLevels();
 		}
 		//Save();
+	}
+
+	private void Save()
+	{
+		PlayerPrefs.SetFloat("Money", money);
+		PlayerPrefs.SetInt("FountainLevel", fountainLevel);
+		PlayerPrefs.SetInt("SpeedLevel", speedLevel);
+		PlayerPrefs.SetInt("IncomeLevel", incomeLevel);
+	}
+
+	private void Load()
+	{
+		if(PlayerPrefs.HasKey("Money")) money = PlayerPrefs.GetFloat("Money");
+		if(PlayerPrefs.HasKey("FountainLevel")) fountainLevel = PlayerPrefs.GetInt("FountainLevel");
+		if(PlayerPrefs.HasKey("SpeedLevel")) speedLevel = PlayerPrefs.GetInt("SpeedLevel");
+		if (PlayerPrefs.HasKey("IncomeLevel")) incomeLevel = PlayerPrefs.GetInt("IncomeLevel");
+	}
+
+	public void ResetSave()
+	{
+		money = 0;
+		fountainLevel = 1;
+		speedLevel = 1;
+		incomeLevel = 1;
+
+		CheckLevels();
+	}
+
+	private void OnApplicationQuit()
+	{
+		Save();
 	}
 }

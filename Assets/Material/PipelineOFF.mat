@@ -46,7 +46,7 @@ Material:
     - _CastShadows: 1
     - _Cull: 0
     - _DstBlend: 0
-    - _Fill: 0.544
+    - _Fill: 0
     - _FillProggress: 1
     - _FresnelPower: 1.17
     - _QueueControl: 0
@@ -62,8 +62,8 @@ Material:
     - _Color: {r: 0, g: 0.90425485, b: 0.95283014, a: 1}
     - _Color_1: {r: 1, g: 1, b: 1, a: 1}
     - _FresnelColor: {r: 0.6745283, g: 1, b: 0.9777494, a: 0}
-    - _LiquidColor: {r: 0.48584902, g: 0.8412569, b: 1, a: 0}
-    - _SurfaceColor: {r: 0.10346203, g: 0.46417344, b: 0.8773585, a: 0}
+    - _LiquidColor: {r: 0, g: 1, b: 0.8818593, a: 0}
+    - _SurfaceColor: {r: 0, g: 0.95960444, b: 1, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &3279843451515352510
 MonoBehaviour:

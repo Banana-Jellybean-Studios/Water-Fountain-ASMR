@@ -141,9 +141,9 @@ Material:
     - _EmptyColor: {r: 1, g: 1, b: 1, a: 1}
     - _FillColor: {r: 0.3537736, g: 0.4580037, b: 1, a: 1}
     - _FresnelColor: {r: 0.6745283, g: 1, b: 0.97774947, a: 0}
-    - _LiquidColor: {r: 0.48584908, g: 0.8412569, b: 1, a: 0}
+    - _LiquidColor: {r: 0, g: 1, b: 0.8818593, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _SurfaceColor: {r: 0.10346207, g: 0.46417353, b: 0.8773585, a: 0}
+    - _SurfaceColor: {r: 0, g: 0.9596045, b: 1, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &8858920815714904976
 MonoBehaviour:
