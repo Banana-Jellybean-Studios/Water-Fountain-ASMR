@@ -9,46 +9,85 @@ using TMPro;
 public class Player : MonoBehaviour
 {
 	[System.Serializable]
-	public struct Level
+	public struct FountainSet { public List<Fountain> fountains; public List<GameObject> otherObjs; }
+
+	[System.Serializable]
+	public struct Fountain
 	{
-		public ParticleSystem particleSystem;
+		public GameObject flowObj;
+		public GameObject flowGroundObj;
 		public GameObject moneyTextEffectPos;
+		public GameObject pipe;
+		public GameObject pipeInnerObj;
+		public float pipeOnShaderStartValue;
+		public float pipeOnShaderEndValue;
+		public float pipeOnShaderTransitionSeconds;
+		public float pipeOffShaderStartValue;
+		public float pipeOffShaderEndValue;
+		public float pipeOffShaderTransitionSeconds;
 		public List<GameObject> objects;
 	}
 
+	public List<FountainSet> fountainSets;
+
+	private int openFountainCount;
+	private Fountain currentFountain;
 
 	[Header("Stats")]
 	public float money = 0;
-	public int addLevel = 1;
-	public int mergeLevel = 1;
+	public int fountainLevel = 1;
+	public int speedLevel = 1;
 	public int incomeLevel = 1;
+	public float moneyIncomeForEachFlow = 10;
+
+	[Header("Speed")]
+	public float fastSpeedFactorOnTouch = 1.5f;
+	public float flowWaitTime = 1.0f;
+
+	[Header("Level Start Counts")]
+	public float speedStartCount = 1f;
+	public float incomeStartCount = 1f;
 
 	[Header("Level Increase Counts")]
+	public float speedIncreaseByLevel = 0.05f;
 	public float incomeIncreaseByLevel = 0.5f;
 
 	[Header("Level Money Counts")]
-	public float addMoneyByLevel = 50;
-	public float mergeMoneyByLevel = 50;
+	public float fountainMoneyByLevel = 50;
+	public float speedMoneyByLevel = 50;
 	public float incomeMoneyByLevel = 50;
 
 	//Current Level Counts
 	private float currentMoneyIncrease = 1;
+	private float currentSpeedNormal = 1;
+	private float currentSpeed = 1;
 
 	//Current Money Counts
-	private float currentAddLevelMoney = 50;
-	private float currentMergeLevelMoney = 50;
+	private float currentFountainLevelMoney = 50;
+	private float currentSpeedLevelMoney = 50;
 	private float currentIncomeLevelMoney = 50;
 
-	public List<Level> levelObjects;
-	public List<GameObject> boruSetleri;
+	[Header("Pipe Materials")]
+	public Material pipeOnMat;
+	public Material pipeOffMat;
+
+	[Header("Shader On Settings")]
+	public Material waterfallOnMat;
+	public float shaderOnStartValue = 0;
+	public float shaderOnEndValue = 0;
+	public float shaderOnTransitionSeconds = 1f;
+
+	[Header("Shader Off Settings")]
+	public Material waterfallOffMat;
+	public float shaderOffStartValue = 0;
+	public float shaderOffEndValue = 0;
+	public float shaderOffTransitionSeconds = 1f;
 
 	public GameObject moneyTextEffect;
 	public TextMeshProUGUI moneyText;
 
-	public float timeIntervalPlus = 2;
-	public float timeIntervalForEach = 1.0f;
-
 	private float flowTime = 0;
+	private bool flowed = true;
 
 	private float TextedMoney(float money)
 	{
@@ -57,89 +96,149 @@ public class Player : MonoBehaviour
 
 	private void Start()
 	{
-		addLevel = 1;
+		fountainLevel = 1;
+	    speedLevel = 1;
+	    incomeLevel = 1;
+
 		CheckLevels();
+
+		//Load();
 	}
 
 	private void Update()
 	{
-		if (Time.time > flowTime)
+		if (flowed)
 		{
 			StopAllCoroutines();
 			StartCoroutine(FlowWater());
-			flowTime = Time.time + timeIntervalPlus + timeIntervalForEach * addLevel;
 		}
+
+		if (Input.touchCount != 0) currentSpeed = currentSpeedNormal * fastSpeedFactorOnTouch;
+		else currentSpeed = currentSpeedNormal;
 
 		moneyText.text = TextedMoney(money).ToString();
 	}
 
 	private IEnumerator FlowWater()
 	{
-		float moneyAmount = 5;
+		float moneyAmount = moneyIncomeForEachFlow * currentMoneyIncrease;
+		flowed = false;
 
-		for (int i = 0; i < levelObjects.Count; i++)
+		for (int i = openFountainCount - 1; i > -1; i--)
 		{
-			levelObjects[i].particleSystem.Stop();
-		}
+			//Shader On
+			MeshRenderer meshFlow = currentFountain.flowObj.GetComponent<MeshRenderer>();
+			meshFlow.material = waterfallOnMat;
+			meshFlow.material.SetFloat("_ProgressBorder", shaderOnStartValue);
+			meshFlow.material.DOFloat(shaderOnEndValue, "_ProgressBorder", shaderOnTransitionSeconds / currentSpeed);
 
-		for (int i = addLevel - 1; i > -1; i--)
-		{
-			levelObjects[i].particleSystem.Play();
-			Instantiate(moneyTextEffect, levelObjects[i].moneyTextEffectPos.transform.position, Quaternion.Euler(0, -90, 0)).GetComponent<TextMeshPro>().text = "$" + TextedMoney(moneyAmount).ToString();
+			currentFountain.flowGroundObj.SetActive(true);
+
+			//Money
+			Instantiate(moneyTextEffect, currentFountain.moneyTextEffectPos.transform.position, Quaternion.Euler(0, -90, 0)).GetComponent<TextMeshPro>().text = "$" + TextedMoney(moneyAmount).ToString();
 			money += moneyAmount;
-			yield return new WaitForSeconds(timeIntervalForEach);
-			levelObjects[i].particleSystem.Stop();
+
+			//Wait
+			yield return new WaitForSeconds(flowWaitTime / currentSpeed);
+
+			//Shader Off
+			meshFlow.material = waterfallOffMat;
+			meshFlow.material.SetFloat("_ProgressBorder", shaderOffStartValue);
+			meshFlow.material.DOFloat(shaderOffEndValue, "_ProgressBorder", shaderOffTransitionSeconds / currentSpeed);
+
+			currentFountain.flowGroundObj.SetActive(false);
 		}
 
-		yield return new WaitForSeconds(timeIntervalPlus);
-	}
+		//Pipe On Shader
+		MeshRenderer meshPipe = currentFountain.pipeInnerObj.GetComponent<MeshRenderer>();
+		meshPipe.material = pipeOnMat;
+		meshPipe.material.SetFloat("_Fill", currentFountain.pipeOnShaderStartValue);
+		meshPipe.material.DOFloat(currentFountain.pipeOnShaderEndValue, "_Fill", currentFountain.pipeOnShaderTransitionSeconds / currentSpeed);
 
-	public void AddFountain()
-	{
-		addLevel++;
-		CheckLevels();
+		//Wait
+		yield return new WaitForSeconds(currentFountain.pipeOnShaderTransitionSeconds / currentSpeed);
+
+		//Pipe Off Shader
+		meshPipe.material = pipeOffMat;
+		meshPipe.material.SetFloat("_Fill", currentFountain.pipeOffShaderStartValue);
+		meshPipe.material.DOFloat(currentFountain.pipeOffShaderEndValue, "_Fill", currentFountain.pipeOffShaderTransitionSeconds / currentSpeed);
+
+		//Flow Finish
+		flowed = true;
 	}
 
 	private void CheckLevels()
 	{
 		//Level Money Counts
-		currentIncomeLevelMoney = 0;
-		for (int i = 0; i < incomeLevel + 1; i++)
+		currentFountainLevelMoney = fountainLevel * fountainMoneyByLevel;
+		currentSpeedLevelMoney = speedLevel * speedMoneyByLevel;
+		currentIncomeLevelMoney = incomeLevel * incomeMoneyByLevel;
+
+		//Current Fountain Level
+		int checkLevel = 0;
+		bool isChecked = false;
+
+		for (int i = 0; i < fountainSets.Count; i++)
 		{
-			currentIncomeLevelMoney += (incomeLevel + 1) * incomeMoneyByLevel;
-		}
-		
-		//Add Level
-		for (int i = 0; i < levelObjects.Count; i++)
-		{
-			for (int j = 0; j < levelObjects[i].objects.Count; j++)
+			for (int j = 0; j < fountainSets[i].fountains.Count; j++)
 			{
-				levelObjects[i].objects[j].SetActive(false);
+				if (fountainLevel <= checkLevel)
+				{
+					currentFountain = fountainSets[i].fountains[j];
+					openFountainCount = j + 1;
+					isChecked = true;
+					break;
+				}
+				else
+				{
+					checkLevel++;
+					continue;
+				}
+			}
+			if (isChecked) break;
+		}
+
+		//Pipe
+		for (int i = 0; i < fountainSets.Count; i++)
+		{
+			for (int j = 0; j < fountainSets[i].fountains.Count; j++)
+			{
+				fountainSets[i].fountains[j].pipe.SetActive(false);
 			}
 		}
 
-		for (int i = 0; i < addLevel; i++)
-		{
-			for (int j = 0; j < levelObjects[i].objects.Count; j++)
-			{
-				levelObjects[i].objects[j].SetActive(true);
-			}
-		}
+		currentFountain.pipe.SetActive(true);
 
-		//Boru
-		for (int i = 0; i < boruSetleri.Count; i++)
-		{
-			boruSetleri[i].SetActive(false);
-		}
-
-		boruSetleri[addLevel - 1].SetActive(true);
-
-		//Merge
-
+		//Speed
+		currentSpeedNormal = speedStartCount + speedIncreaseByLevel * (speedLevel - 1);
 
 		//Income
-		currentMoneyIncrease = incomeLevel * incomeIncreaseByLevel + incomeIncreaseByLevel;
+		currentMoneyIncrease = incomeStartCount + incomeIncreaseByLevel * (incomeLevel - 1);
 
+	}
+
+	public void BuyFountainUpgrade()
+	{
+		if (money >= currentFountainLevelMoney)
+		{
+			fountainLevel++;
+			money -= currentFountainLevelMoney;
+			//Vibrate();
+			CheckLevels();
+		}
+		//Save();
+	}
+
+	public void BuySpeedUpgrade()
+	{
+		if (money >= currentSpeedLevelMoney)
+		{
+			speedLevel++;
+			money -= currentSpeedLevelMoney;
+			//Vibrate();
+			CheckLevels();
+		}
+		//Save();
 	}
 
 	public void BuyIncomeUpgrade()
@@ -153,33 +252,4 @@ public class Player : MonoBehaviour
 		}
 		//Save();
 	}
-
-	/*
-	 * [SerializeField] private PathCreator creator;
-	[SerializeField] private GameObject waterBall;
-	[SerializeField] private float spawnDistance = 0.2f;
-	[SerializeField] private float spawnScaleMin = 0.3f;
-	[SerializeField] private float spawnScaleMax = 1f;
-	[SerializeField] private float speed = 1;
-	private float distance = 0;
-
-	private List<GameObject> balls;
-	 * 
-	 * balls = new List<GameObject>();
-
-		for (float i = 0; i < creator.path.length; i+=spawnDistance)
-		{
-			GameObject spawned = Instantiate(waterBall, creator.path.GetPointAtDistance(i), Quaternion.identity);
-			spawned.transform.localScale = Vector3.one * Random.Range(spawnScaleMin, spawnScaleMax);
-			balls.Add(spawned);
-		}
-	 * 
-	 * 
-	 distance += speed * Time.deltaTime;
-
-		for (int i = 0; i < balls.Count; i++)
-		{
-			balls[i].transform.position = creator.path.GetPointAtDistance(i * spawnDistance + distance);
-		}
-	 * */
 }
