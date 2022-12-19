@@ -108,7 +108,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EnvironmentReflections: 1
-    - _Fill: 0.246
+    - _Fill: 0
     - _FillProggress: 1
     - _FillRate: 0.651
     - _FresnelPower: 1.17
