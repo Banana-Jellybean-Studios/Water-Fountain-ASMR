@@ -48,13 +48,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _AlphaClipping: -1.48
     - _Metalic: 0.4
     - _NormalsStrength: 0
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Smoothness: 1.4
     - _Transparency: 0
-    - _TransparencyMask: 2.88
+    - _TransparencyMask: 5.72
     - _VoroniAgitation: 1
     - _VoroniPower: -0.55
     - _VoroniScale: 12
