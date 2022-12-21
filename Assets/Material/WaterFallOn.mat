@@ -61,9 +61,9 @@ Material:
     - _VoroniAgitation: 1
     - _VoroniPower: -0.55
     - _VoroniScale: 12
-    - _WoobbleAmount: 0.04
-    - _WoobbleFrequency: 4
-    - _WoobbleHeight: 1
+    - _WoobbleAmount: 0.05
+    - _WoobbleFrequency: 5
+    - _WoobbleHeight: 0.5
     - _WoobbleSpeed: 16
     m_Colors:
     - _BaseColor: {r: 0.2971698, g: 0.6692564, b: 1, a: 0}
