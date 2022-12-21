@@ -63,10 +63,10 @@ Material:
     - _WoobbleHeight: 0
     - _WoobbleSpeed: 0
     m_Colors:
-    - _BaseColor: {r: 0.02745098, g: 0.25, b: 0.25, a: 1}
+    - _BaseColor: {r: 0, g: 0.2273961, b: 0.8, a: 1}
     - _BaseColor_1: {r: 0, g: 0.6431373, b: 3.090196, a: 0}
     - _NormalsSpeed: {r: 0, g: 0.9, b: 0, a: 0}
-    - _VoroniColor: {r: 0.011764706, g: 0.5, b: 0.5, a: 1}
+    - _VoroniColor: {r: 0, g: 0.2273961, b: 0.8, a: 1}
     - _VoroniSpeed: {r: 0, g: 0.1, b: 0, a: 0}
     - _VoroniTiling: {r: 0.5, g: 1.5, b: 0, a: 0}
   m_BuildTextureStacks: []

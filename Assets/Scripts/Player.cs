@@ -176,8 +176,6 @@ public class Player : MonoBehaviour
 			meshFlow.material.SetFloat("_ProgressBorder", shaderOnStartValue);
 			meshFlow.material.DOFloat(shaderOnEndValue, "_ProgressBorder", shaderOnTransitionSeconds / currentSpeed);
 
-			currentFountainSet.fountains[i].flowGroundObj.SetActive(true);
-
 			//Money
 			GameObject moneyObj = Instantiate(moneyTextEffect, currentFountainSet.fountains[i].moneyTextEffectPos.transform.position, Quaternion.Euler(0, -90, 0));
 			moneyObj.GetComponent<TextMeshPro>().text = "$" + TextedMoney(moneyAmount).ToString();
@@ -185,12 +183,20 @@ public class Player : MonoBehaviour
 			money += moneyAmount;
 
 			//Wait
-			yield return new WaitForSeconds(flowWaitTime / currentSpeed);
+			yield return new WaitForSeconds(shaderOnTransitionSeconds / currentSpeed);
+
+			currentFountainSet.fountains[i].flowGroundObj.SetActive(true);
+
+			//Wait
+			yield return new WaitForSeconds(flowWaitTime / currentSpeed - shaderOnTransitionSeconds / currentSpeed - shaderOffTransitionSeconds / currentSpeed);
 
 			//Shader Off
 			meshFlow.material = waterfallOffMat;
 			meshFlow.material.SetFloat("_ProgressBorder", shaderOffStartValue);
 			meshFlow.material.DOFloat(shaderOffEndValue, "_ProgressBorder", shaderOffTransitionSeconds / currentSpeed);
+
+			//Wait
+			yield return new WaitForSeconds(shaderOffTransitionSeconds / currentSpeed);
 
 			currentFountainSet.fountains[i].flowGroundObj.SetActive(false);
 		}
