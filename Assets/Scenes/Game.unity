@@ -2489,6 +2489,75 @@ Transform:
   m_Father: {fileID: 5841953924010629143}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1812244436281067706
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1812244436605394440, guid: b92d67c74e0f56c40a6a01266b390b7a,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1812244436605394440, guid: b92d67c74e0f56c40a6a01266b390b7a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.34
+      objectReference: {fileID: 0}
+    - target: {fileID: 1812244436605394440, guid: b92d67c74e0f56c40a6a01266b390b7a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.4100003
+      objectReference: {fileID: 0}
+    - target: {fileID: 1812244436605394440, guid: b92d67c74e0f56c40a6a01266b390b7a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1812244436605394440, guid: b92d67c74e0f56c40a6a01266b390b7a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.707107
+      objectReference: {fileID: 0}
+    - target: {fileID: 1812244436605394440, guid: b92d67c74e0f56c40a6a01266b390b7a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071066
+      objectReference: {fileID: 0}
+    - target: {fileID: 1812244436605394440, guid: b92d67c74e0f56c40a6a01266b390b7a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1812244436605394440, guid: b92d67c74e0f56c40a6a01266b390b7a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1812244436605394440, guid: b92d67c74e0f56c40a6a01266b390b7a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1812244436605394440, guid: b92d67c74e0f56c40a6a01266b390b7a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1812244436605394440, guid: b92d67c74e0f56c40a6a01266b390b7a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1812244436605394443, guid: b92d67c74e0f56c40a6a01266b390b7a,
+        type: 3}
+      propertyPath: m_Name
+      value: WaterDropParticle
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b92d67c74e0f56c40a6a01266b390b7a, type: 3}
 --- !u!4 &2025474429139754455
 Transform:
   m_ObjectHideFlags: 0
