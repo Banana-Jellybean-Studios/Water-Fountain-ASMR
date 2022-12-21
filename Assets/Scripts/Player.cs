@@ -101,9 +101,12 @@ public class Player : MonoBehaviour
 	public TextMeshProUGUI addLevelText;
 	public TextMeshProUGUI speedLevelText;
 	public TextMeshProUGUI incomeLevelText;
+	public GameObject addUIObj;
+	public GameObject mergeUIObj;
 
 	private float flowTime = 0;
 	private bool flowed = true;
+	private int maxFountainLevel = 0;
 
 	private float TextedMoney(float money)
 	{
@@ -115,6 +118,17 @@ public class Player : MonoBehaviour
 		fountainLevel = 1;
 	    speedLevel = 1;
 	    incomeLevel = 1;
+
+		//Max fountain level
+		maxFountainLevel = 0;
+
+		for (int i = 0; i < fountainSets.Count; i++)
+		{
+			for (int j = 0; j < fountainSets[i].fountains.Count; j++)
+			{
+				maxFountainLevel++;
+			}
+		}
 
 		Load();
 
@@ -201,17 +215,27 @@ public class Player : MonoBehaviour
 
 	private void CheckLevels()
 	{
-		//Level Money Counts
+		//Level money counts and texts
 		currentFountainLevelMoney = fountainLevel * fountainMoneyByLevel;
 		currentSpeedLevelMoney = speedLevel * speedMoneyByLevel;
 		currentIncomeLevelMoney = incomeLevel * incomeMoneyByLevel;
 
-		addMoneyText.text = TextedMoney(currentFountainLevelMoney).ToString();
+		if (fountainLevel >= maxFountainLevel)
+		{
+			addMoneyText.text = "Max";
+			addLevelText.text = $"Level Max";
+		}
+		else
+		{
+			addMoneyText.text = TextedMoney(currentFountainLevelMoney).ToString();
+			addLevelText.text = $"Level {fountainLevel}";
+		}
+
 		speedMoneyText.text = TextedMoney(currentSpeedLevelMoney).ToString();
+		speedLevelText.text = $"Level {speedLevel}";
+
 		incomeMoneyText.text = TextedMoney(currentIncomeLevelMoney).ToString();
-		addLevelText.text = fountainLevel.ToString();
-		speedLevelText.text = speedLevel.ToString();
-		incomeLevelText.text = incomeLevel.ToString();
+		incomeLevelText.text = $"Level {incomeLevel}";
 
 		//Current Fountain Level
 		int checkLevel = 1;
@@ -256,6 +280,18 @@ public class Player : MonoBehaviour
 		for (int i = 0; i < openFountainCount; i++)
 		{
 			currentFountainSet.fountains[i].objects[0].SetActive(true);
+		}
+
+		//Add - Merge text and icon change
+		if (openFountainCount == currentFountainSet.fountains.Count)
+		{
+			mergeUIObj.SetActive(true);
+			addUIObj.SetActive(false);
+		}
+		else
+		{
+			mergeUIObj.SetActive(false);
+			addUIObj.SetActive(true);
 		}
 
 		//Pipe
