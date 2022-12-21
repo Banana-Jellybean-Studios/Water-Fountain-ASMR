@@ -61,7 +61,7 @@ Material:
     - _VoroniAgitation: 1
     - _VoroniPower: -0.55
     - _VoroniScale: 12
-    - _WoobbleAmount: 0.05
+    - _WoobbleAmount: 0.07
     - _WoobbleFrequency: 5
     - _WoobbleHeight: 0.5
     - _WoobbleSpeed: 16
