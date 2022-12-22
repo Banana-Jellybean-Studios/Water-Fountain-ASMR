@@ -9700,7 +9700,7 @@ MonoBehaviour:
   horizonColor: {r: 0, g: 0.6392157, b: 0.99607843, a: 1}
   horizonDistance: 20
   shoreFade: 0
-  shoreColor: {r: 0, g: 0.98039216, b: 0.30187273, a: 0}
+  shoreColor: {r: 0, g: 0.98039216, b: 0.30188724, a: 0}
   shoreStrength: 0
   shoreBlend: 0
   shoreDepth: 0
@@ -9709,8 +9709,8 @@ MonoBehaviour:
   underwaterColorStrength: 0
   underwaterRefractionStrength: 0
   surfaceFoamTexture: {fileID: 2800000, guid: 5293ac8cd3dd6f6478585f4f30abddf7, type: 3}
-  surfaceFoamSampling: {x: 0.619, y: 0}
-  surfaceFoamCutoff: 0.619
+  surfaceFoamSampling: {x: 0.771, y: 0}
+  surfaceFoamCutoff: 0.771
   surfaceFoamDistortion: 0
   surfaceFoamBlend: 1
   surfaceFoamColor1: {r: 1, g: 1, b: 1, a: 0.3215686}
@@ -9813,7 +9813,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5154cf1e9af3dea448731e42258a542c, type: 2}
+  - {fileID: 2100000, guid: 2fd7dc8e5396c01479a7266747f1710e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9935,7 +9935,7 @@ MonoBehaviour:
   horizonColor: {r: 0, g: 0.6392157, b: 0.99607843, a: 1}
   horizonDistance: 20
   shoreFade: 0
-  shoreColor: {r: 0, g: 0.98039216, b: 0.3018727, a: 0}
+  shoreColor: {r: 0, g: 0.98039216, b: 0.3018872, a: 0}
   shoreStrength: 0
   shoreBlend: 0
   shoreDepth: 0
@@ -9944,8 +9944,8 @@ MonoBehaviour:
   underwaterColorStrength: 0
   underwaterRefractionStrength: 0
   surfaceFoamTexture: {fileID: 2800000, guid: 5293ac8cd3dd6f6478585f4f30abddf7, type: 3}
-  surfaceFoamSampling: {x: 0.619, y: 0}
-  surfaceFoamCutoff: 0.619
+  surfaceFoamSampling: {x: 0.771, y: 0}
+  surfaceFoamCutoff: 0.771
   surfaceFoamDistortion: 0
   surfaceFoamBlend: 1
   surfaceFoamColor1: {r: 1, g: 1, b: 1, a: 0.3215686}
@@ -10048,7 +10048,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5154cf1e9af3dea448731e42258a542c, type: 2}
+  - {fileID: 2100000, guid: 2fd7dc8e5396c01479a7266747f1710e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10105,14 +10105,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 206703143}
-  m_LocalRotation: {x: -0.026030252, y: 0.70662767, z: 0.026030073, w: 0.70662737}
-  m_LocalPosition: {x: -0.01, y: 2.4, z: 0.01}
+  m_LocalRotation: {x: -0.2127387, y: 0.674346, z: 0.21273854, w: 0.6743457}
+  m_LocalPosition: {x: 0.002, y: 2.179, z: 0.01}
   m_LocalScale: {x: 2.338068, y: 0.0023111065, z: 2.9123433}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 9215820120384417188}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: -4.219, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: -35.018, y: 90, z: 0}
 --- !u!114 &206703145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10170,7 +10170,7 @@ MonoBehaviour:
   horizonColor: {r: 0, g: 0.6392157, b: 0.99607843, a: 1}
   horizonDistance: 20
   shoreFade: 0
-  shoreColor: {r: 0, g: 0.98039216, b: 0.30187267, a: 0}
+  shoreColor: {r: 0, g: 0.98039216, b: 0.30188718, a: 0}
   shoreStrength: 0
   shoreBlend: 0
   shoreDepth: 0
@@ -10179,8 +10179,8 @@ MonoBehaviour:
   underwaterColorStrength: 0
   underwaterRefractionStrength: 0
   surfaceFoamTexture: {fileID: 2800000, guid: 5293ac8cd3dd6f6478585f4f30abddf7, type: 3}
-  surfaceFoamSampling: {x: 0.619, y: 0}
-  surfaceFoamCutoff: 0.619
+  surfaceFoamSampling: {x: 0.771, y: 0}
+  surfaceFoamCutoff: 0.771
   surfaceFoamDistortion: 0
   surfaceFoamBlend: 1
   surfaceFoamColor1: {r: 1, g: 1, b: 1, a: 0.3215686}
@@ -10248,7 +10248,7 @@ MonoBehaviour:
   enableRefraction: 0
   meshRenderer: {fileID: 206703147}
   meshFilter: {fileID: 206703148}
-  material: {fileID: 2100000, guid: 5154cf1e9af3dea448731e42258a542c, type: 2}
+  material: {fileID: 2100000, guid: 2fd7dc8e5396c01479a7266747f1710e, type: 2}
 --- !u!136 &206703146
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -10283,7 +10283,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5154cf1e9af3dea448731e42258a542c, type: 2}
+  - {fileID: 2100000, guid: 2fd7dc8e5396c01479a7266747f1710e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10467,7 +10467,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5154cf1e9af3dea448731e42258a542c, type: 2}
+  - {fileID: 2100000, guid: 2fd7dc8e5396c01479a7266747f1710e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10554,7 +10554,7 @@ MonoBehaviour:
   horizonColor: {r: 0, g: 0.6392157, b: 0.99607843, a: 1}
   horizonDistance: 20
   shoreFade: 0
-  shoreColor: {r: 0, g: 0.98039216, b: 0.30188215, a: 0}
+  shoreColor: {r: 0, g: 0.98039216, b: 0.30187634, a: 0}
   shoreStrength: 0
   shoreBlend: 0
   shoreDepth: 0
@@ -15413,7 +15413,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5154cf1e9af3dea448731e42258a542c, type: 2}
+  - {fileID: 2100000, guid: 2fd7dc8e5396c01479a7266747f1710e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -15500,7 +15500,7 @@ MonoBehaviour:
   horizonColor: {r: 0, g: 0.6392157, b: 0.99607843, a: 1}
   horizonDistance: 20
   shoreFade: 0
-  shoreColor: {r: 0, g: 0.98039216, b: 0.30188212, a: 0}
+  shoreColor: {r: 0, g: 0.98039216, b: 0.30187637, a: 0}
   shoreStrength: 0
   shoreBlend: 0
   shoreDepth: 0
@@ -16062,7 +16062,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5154cf1e9af3dea448731e42258a542c, type: 2}
+  - {fileID: 2100000, guid: 2fd7dc8e5396c01479a7266747f1710e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -16149,7 +16149,7 @@ MonoBehaviour:
   horizonColor: {r: 0, g: 0.6392157, b: 0.99607843, a: 1}
   horizonDistance: 20
   shoreFade: 0
-  shoreColor: {r: 0, g: 0.98039216, b: 0.3018821, a: 0}
+  shoreColor: {r: 0, g: 0.98039216, b: 0.3018764, a: 0}
   shoreStrength: 0
   shoreBlend: 0
   shoreDepth: 0
@@ -45551,7 +45551,7 @@ MonoBehaviour:
   horizonColor: {r: 0, g: 0.6392157, b: 0.99607843, a: 1}
   horizonDistance: 20
   shoreFade: 0
-  shoreColor: {r: 0, g: 0.98039216, b: 0.30187264, a: 0}
+  shoreColor: {r: 0, g: 0.98039216, b: 0.30188715, a: 0}
   shoreStrength: 0
   shoreBlend: 0
   shoreDepth: 0
@@ -45560,8 +45560,8 @@ MonoBehaviour:
   underwaterColorStrength: 0
   underwaterRefractionStrength: 0
   surfaceFoamTexture: {fileID: 2800000, guid: 5293ac8cd3dd6f6478585f4f30abddf7, type: 3}
-  surfaceFoamSampling: {x: 0.619, y: 0}
-  surfaceFoamCutoff: 0.619
+  surfaceFoamSampling: {x: 0.771, y: 0}
+  surfaceFoamCutoff: 0.771
   surfaceFoamDistortion: 0
   surfaceFoamBlend: 1
   surfaceFoamColor1: {r: 1, g: 1, b: 1, a: 0.3215686}
@@ -45664,7 +45664,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5154cf1e9af3dea448731e42258a542c, type: 2}
+  - {fileID: 2100000, guid: 2fd7dc8e5396c01479a7266747f1710e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -55802,7 +55802,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5154cf1e9af3dea448731e42258a542c, type: 2}
+  - {fileID: 2100000, guid: 2fd7dc8e5396c01479a7266747f1710e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -55889,7 +55889,7 @@ MonoBehaviour:
   horizonColor: {r: 0, g: 0.6392157, b: 0.99607843, a: 1}
   horizonDistance: 20
   shoreFade: 0
-  shoreColor: {r: 0, g: 0.98039216, b: 0.30188206, a: 0}
+  shoreColor: {r: 0, g: 0.98039216, b: 0.30187643, a: 0}
   shoreStrength: 0
   shoreBlend: 0
   shoreDepth: 0
@@ -65841,7 +65841,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132148167310709}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.13, y: 1.17, z: 0.13000003}
+  m_LocalPosition: {x: -0.13, y: 1.03, z: 0.13000003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -65949,7 +65949,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1127831704928475558
 Transform:
   m_ObjectHideFlags: 0
@@ -66111,7 +66111,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e3747f9c0d007b648927193d413195c9, type: 2}
+  - {fileID: 2100000, guid: 2fd7dc8e5396c01479a7266747f1710e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -71097,7 +71097,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &2407528226832882521
 GameObject:
   m_ObjectHideFlags: 0
@@ -71415,7 +71415,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b6847ac469110db4abadda9da96306a7, type: 2}
+  - {fileID: 2100000, guid: a9c32c6bd5ec4454eb66d7dacf4c66df, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -74351,7 +74351,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 6853b2a905bc87c4e96c0da2121161ba, type: 2}
-  - {fileID: -6478536213147159724, guid: 91cfdde8ab774ac4a94c0e2d2c71083d, type: 3}
+  - {fileID: 2100000, guid: 01bbc9985719bf146a2385162c6709be, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
