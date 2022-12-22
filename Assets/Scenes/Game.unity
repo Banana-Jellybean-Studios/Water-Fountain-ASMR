@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 5a5778ca822bd8c4db5ba8cd4466247e, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -9700,7 +9700,7 @@ MonoBehaviour:
   horizonColor: {r: 0, g: 0.6392157, b: 0.99607843, a: 1}
   horizonDistance: 20
   shoreFade: 0
-  shoreColor: {r: 0, g: 0.98039216, b: 0.3018912, a: 0}
+  shoreColor: {r: 0, g: 0.98039216, b: 0.3018899, a: 0}
   shoreStrength: 0
   shoreBlend: 0
   shoreDepth: 0
@@ -9935,7 +9935,7 @@ MonoBehaviour:
   horizonColor: {r: 0, g: 0.6392157, b: 0.99607843, a: 1}
   horizonDistance: 20
   shoreFade: 0
-  shoreColor: {r: 0, g: 0.98039216, b: 0.30189118, a: 0}
+  shoreColor: {r: 0, g: 0.98039216, b: 0.30188987, a: 0}
   shoreStrength: 0
   shoreBlend: 0
   shoreDepth: 0
@@ -10170,7 +10170,7 @@ MonoBehaviour:
   horizonColor: {r: 0, g: 0.6392157, b: 0.99607843, a: 1}
   horizonDistance: 20
   shoreFade: 0
-  shoreColor: {r: 0, g: 0.98039216, b: 0.30189115, a: 0}
+  shoreColor: {r: 0, g: 0.98039216, b: 0.30188984, a: 0}
   shoreStrength: 0
   shoreBlend: 0
   shoreDepth: 0
@@ -16320,7 +16320,7 @@ MonoBehaviour:
   horizonColor: {r: 0, g: 0.6392157, b: 0.99607843, a: 1}
   horizonDistance: 20
   shoreFade: 0
-  shoreColor: {r: 0, g: 0.98039216, b: 0.30189112, a: 0}
+  shoreColor: {r: 0, g: 0.98039216, b: 0.3018898, a: 0}
   shoreStrength: 0
   shoreBlend: 0
   shoreDepth: 0
@@ -21275,6 +21275,55 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!1 &807051584
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 807051586}
+  - component: {fileID: 807051585}
+  m_Layer: 0
+  m_Name: Global Volume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &807051585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 807051584}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 795639ad5ed9e6846a2694bec02bad84, type: 2}
+--- !u!4 &807051586
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 807051584}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.1120033, y: 308.50644, z: 3.149809}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &820433161
 GameObject:
   m_ObjectHideFlags: 0
@@ -30831,7 +30880,7 @@ MonoBehaviour:
   horizonColor: {r: 0, g: 0.6392157, b: 0.99607843, a: 1}
   horizonDistance: 20
   shoreFade: 0
-  shoreColor: {r: 0, g: 0.98039216, b: 0.3018911, a: 0}
+  shoreColor: {r: 0, g: 0.98039216, b: 0.30188978, a: 0}
   shoreStrength: 0
   shoreBlend: 0
   shoreDepth: 0
@@ -31051,8 +31100,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: -0.11636146, y: -0.8724097, z: 0.25310835, w: -0.40161863}
-  m_LocalPosition: {x: -19.14, y: 322.02, z: 15.61}
+  m_LocalRotation: {x: 0.09409046, y: 0.88793296, z: -0.20968214, w: 0.39844137}
+  m_LocalPosition: {x: -29.837889, y: 333.938, z: 25.933727}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -31082,7 +31131,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 2
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -45972,7 +46021,7 @@ MonoBehaviour:
   horizonColor: {r: 0, g: 0.6392157, b: 0.99607843, a: 1}
   horizonDistance: 20
   shoreFade: 0
-  shoreColor: {r: 0, g: 0.98039216, b: 0.30189106, a: 0}
+  shoreColor: {r: 0, g: 0.98039216, b: 0.30188975, a: 0}
   shoreStrength: 0
   shoreBlend: 0
   shoreDepth: 0
@@ -46232,7 +46281,7 @@ ReflectionProbe:
   m_TimeSlicingMode: 0
   m_Resolution: 128
   m_UpdateFrequency: 0
-  m_BoxSize: {x: 32.120464, y: 29.826866, z: 25.44331}
+  m_BoxSize: {x: 47.66072, y: 52.441143, z: 54.236183}
   m_BoxOffset: {x: 0, y: 0, z: 0}
   m_NearClip: 0.3
   m_FarClip: 1000
@@ -56480,7 +56529,7 @@ MonoBehaviour:
   horizonColor: {r: 0, g: 0.6392157, b: 0.99607843, a: 1}
   horizonDistance: 20
   shoreFade: 0
-  shoreColor: {r: 0, g: 0.98039216, b: 0.30189103, a: 0}
+  shoreColor: {r: 0, g: 0.98039216, b: 0.30188972, a: 0}
   shoreStrength: 0
   shoreBlend: 0
   shoreDepth: 0

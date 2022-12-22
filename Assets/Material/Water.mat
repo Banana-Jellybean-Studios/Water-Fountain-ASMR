@@ -220,7 +220,7 @@ Material:
     - _NormalsMovement: {r: 0.04, g: 0.36, b: 0, a: 0}
     - _NormalsSpeed: {r: 0, g: 0.2, b: 0, a: 0}
     - _RippleColor: {r: 0.33681914, g: 0.60452825, b: 0.8207547, a: 0}
-    - _ShoreColor: {r: 0, g: 0.98039216, b: 0.30189103, a: 0}
+    - _ShoreColor: {r: 0, g: 0.98039216, b: 0.30188972, a: 0}
     - _SpecColor: {r: 0.20754719, g: 0.20754719, b: 0.20754719, a: 1}
     - _SurfaceFoamColor1: {r: 1, g: 1, b: 1, a: 0.3215686}
     - _SurfaceFoamColor2: {r: 1, g: 1, b: 1, a: 0.7294118}
