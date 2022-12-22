@@ -22,9 +22,10 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Bowl
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - _EMISSION
   m_InvalidKeywords: []
-  m_LightmapFlags: 4
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -130,7 +131,7 @@ Material:
     - _RimAlpha: 0
     - _RimDropOff: 0
     - _RimPower: 0
-    - _Smoothness: 0
+    - _Smoothness: 0.558
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -138,9 +139,9 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 1, g: 0.2235294, b: 0.4308857, a: 1}
-    - _Color: {r: 1, g: 0.22352937, b: 0.43088567, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _BaseColor: {r: 0.63228655, g: 0, b: 1, a: 1}
+    - _Color: {r: 0.6322865, g: 0, b: 1, a: 1}
+    - _EmissionColor: {r: 0.35640025, g: 0, b: 1, a: 1}
     - _FresnelColor: {r: 1, g: 1, b: 1, a: 1}
     - _HighColor: {r: 1, g: 1, b: 1, a: 1}
     - _LowColor: {r: 1, g: 1, b: 1, a: 1}

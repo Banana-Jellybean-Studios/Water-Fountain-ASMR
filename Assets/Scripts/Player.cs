@@ -6,6 +6,7 @@ using DG.Tweening;
 using PathCreation;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -51,6 +52,10 @@ public class Player : MonoBehaviour
 	public float fastSpeedFactorOnTouch = 1.5f;
 	public float flowWaitTime = 1.0f;
 
+	[Header("Level Max Counts")]
+	public int maxSpeedLevel = 7;
+	public int maxIncomeLevel = 7;
+
 	[Header("Level Start Counts")]
 	public float speedStartCount = 1f;
 	public float incomeStartCount = 1f;
@@ -92,17 +97,18 @@ public class Player : MonoBehaviour
 
 	[Header("Effect")]
 	public GameObject moneyTextEffect;
+	public ParticleSystem newItemEffect;
 
 	[Header("UI")]
 	public TextMeshProUGUI haveMoneyText;
 	public TextMeshProUGUI addMoneyText;
 	public TextMeshProUGUI speedMoneyText;
 	public TextMeshProUGUI incomeMoneyText;
-	public TextMeshProUGUI addLevelText;
-	public TextMeshProUGUI speedLevelText;
-	public TextMeshProUGUI incomeLevelText;
-	public GameObject addUIObj;
-	public GameObject mergeUIObj;
+	public GameObject addUIButton;
+	public GameObject upgradeUIButton;
+	public GameObject speedUIButton;
+	public GameObject incomeUIButton;
+	public TextMeshProUGUI moneyForSecText;
 
 	private float flowTime = 0;
 	private bool flowed = true;
@@ -148,6 +154,13 @@ public class Player : MonoBehaviour
 		else currentSpeed = currentSpeedNormal;
 
 		haveMoneyText.text = TextedMoney(money).ToString();
+
+		CheckButtons();
+
+		//Flow Money For Seconds
+		float moneyForSec = moneyIncomeForEachFlow * currentMoneyIncrease * (currentFountainSetLevel + 1) * openFountainCount;
+		moneyForSec /= (flowWaitTime / currentSpeed) + (currentFountainSet.fountains[openFountainCount - 1].pipeOnShaderTransitionSeconds / currentSpeed);
+		moneyForSecText.text = $"{TextedMoney(moneyForSec)}/sec";
 	}
 
 	private void FixedUpdate()
@@ -224,8 +237,8 @@ public class Player : MonoBehaviour
 	private void CheckLevels()
 	{
 		//Level money counts and texts
-
 		currentFountainLevelMoney = 0;
+
 		for (int i = 0; i < fountainLevel; i++)
 		{
 			currentFountainLevelMoney += (i + 1) * fountainMoneyByLevel;
@@ -234,22 +247,33 @@ public class Player : MonoBehaviour
 		currentSpeedLevelMoney = speedLevel * speedMoneyByLevel;
 		currentIncomeLevelMoney = incomeLevel * incomeMoneyByLevel;
 
+		//UI
 		if (fountainLevel >= maxFountainLevel)
 		{
 			addMoneyText.text = "Max";
-			addLevelText.text = $"Level Max";
 		}
 		else
 		{
-			addMoneyText.text = TextedMoney(currentFountainLevelMoney).ToString();
-			addLevelText.text = $"Level {fountainLevel}";
+			addMoneyText.text = "$" + TextedMoney(currentFountainLevelMoney).ToString();
 		}
 
-		speedMoneyText.text = TextedMoney(currentSpeedLevelMoney).ToString();
-		speedLevelText.text = $"Level {speedLevel}";
+		if (speedLevel >= maxSpeedLevel)
+		{
+			speedMoneyText.text = "Max";
+		}
+		else
+		{
+			speedMoneyText.text = "$" + TextedMoney(currentSpeedLevelMoney).ToString();
+		}
 
-		incomeMoneyText.text = TextedMoney(currentIncomeLevelMoney).ToString();
-		incomeLevelText.text = $"Level {incomeLevel}";
+		if (incomeLevel >= maxIncomeLevel)
+		{
+			incomeMoneyText.text = "Max";
+		}
+		else
+		{
+			incomeMoneyText.text = "$" + TextedMoney(currentIncomeLevelMoney).ToString();
+		}
 
 		//Current Fountain Level
 		int checkLevel = 1;
@@ -300,18 +324,6 @@ public class Player : MonoBehaviour
 			currentFountainSet.fountains[i].objects[0].SetActive(true);
 		}
 
-		//Add - Merge text and icon change
-		if (openFountainCount == currentFountainSet.fountains.Count)
-		{
-			mergeUIObj.SetActive(true);
-			addUIObj.SetActive(false);
-		}
-		else
-		{
-			mergeUIObj.SetActive(false);
-			addUIObj.SetActive(true);
-		}
-
 		//Pipe
 		for (int i = 0; i < fountainSets.Count; i++)
 		{
@@ -339,9 +351,10 @@ public class Player : MonoBehaviour
 			fountainLevel++;
 			money -= currentFountainLevelMoney;
 			//Vibrate();
+			newItemEffect.Play();
 			CheckLevels();
 		}
-		//Save();
+		Save();
 	}
 
 	public void BuySpeedUpgrade()
@@ -353,7 +366,7 @@ public class Player : MonoBehaviour
 			//Vibrate();
 			CheckLevels();
 		}
-		//Save();
+		Save();
 	}
 
 	public void BuyIncomeUpgrade()
@@ -365,7 +378,59 @@ public class Player : MonoBehaviour
 			//Vibrate();
 			CheckLevels();
 		}
-		//Save();
+		Save();
+	}
+
+	private void CheckButtons()
+	{
+		//Add button
+		if (fountainLevel >= maxFountainLevel || currentFountainLevelMoney > money || openFountainCount == currentFountainSet.fountains.Count)
+		{
+			addUIButton.GetComponent<Button>().interactable = false;
+		}
+		else
+		{
+			addUIButton.GetComponent<Button>().interactable = true;
+		}
+
+		//Upgrade button
+		if (openFountainCount != currentFountainSet.fountains.Count || fountainLevel >= maxFountainLevel)
+		{
+			upgradeUIButton.SetActive(false);
+		}
+		else
+		{
+			if (currentFountainLevelMoney > money)
+			{
+				upgradeUIButton.SetActive(true);
+				upgradeUIButton.GetComponent<Button>().interactable = false;
+			}
+			else
+			{
+				upgradeUIButton.SetActive(true);
+				upgradeUIButton.GetComponent<Button>().interactable = true;
+			}
+		}
+
+		//Speed button
+		if (speedLevel >= maxSpeedLevel || currentSpeedLevelMoney > money)
+		{
+			speedUIButton.GetComponent<Button>().interactable = false;
+		}
+		else
+		{
+			speedUIButton.GetComponent<Button>().interactable = true;
+		}
+
+		//Income button
+		if (incomeLevel >= maxIncomeLevel || currentIncomeLevelMoney > money)
+		{
+			incomeUIButton.GetComponent<Button>().interactable = false;
+		}
+		else
+		{
+			incomeUIButton.GetComponent<Button>().interactable = true;
+		}
 	}
 
 	private void Save()

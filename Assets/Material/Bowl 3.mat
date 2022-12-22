@@ -130,7 +130,7 @@ Material:
     - _RimAlpha: 0
     - _RimDropOff: 0
     - _RimPower: 0
-    - _Smoothness: 0
+    - _Smoothness: 0.4
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1

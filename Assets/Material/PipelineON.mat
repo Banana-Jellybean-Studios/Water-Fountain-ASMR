@@ -46,7 +46,7 @@ Material:
     - _CastShadows: 1
     - _Cull: 0
     - _DstBlend: 0
-    - _Fill: 1
+    - _Fill: 0
     - _FillProggress: 1
     - _FresnelPower: 1.17
     - _QueueControl: 0
