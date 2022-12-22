@@ -107,6 +107,7 @@ public class Player : MonoBehaviour
 	private float flowTime = 0;
 	private bool flowed = true;
 	private int maxFountainLevel = 0;
+	private int currentFountainSetLevel = 0;
 
 	private float TextedMoney(float money)
 	{
@@ -165,11 +166,12 @@ public class Player : MonoBehaviour
 
 	private IEnumerator FlowWater()
 	{
-		float moneyAmount = moneyIncomeForEachFlow * currentMoneyIncrease;
 		flowed = false;
 
 		for (int i = openFountainCount - 1; i > -1; i--)
 		{
+			float moneyAmount = moneyIncomeForEachFlow * currentMoneyIncrease * (currentFountainSetLevel + 1);
+
 			//Shader On
 			MeshRenderer meshFlow = currentFountainSet.fountains[i].flowObj.GetComponent<MeshRenderer>();
 			meshFlow.material = waterfallOnMat;
@@ -222,7 +224,13 @@ public class Player : MonoBehaviour
 	private void CheckLevels()
 	{
 		//Level money counts and texts
-		currentFountainLevelMoney = fountainLevel * fountainMoneyByLevel;
+
+		currentFountainLevelMoney = 0;
+		for (int i = 0; i < fountainLevel; i++)
+		{
+			currentFountainLevelMoney += (i + 1) * fountainMoneyByLevel;
+		}
+
 		currentSpeedLevelMoney = speedLevel * speedMoneyByLevel;
 		currentIncomeLevelMoney = incomeLevel * incomeMoneyByLevel;
 
@@ -253,6 +261,7 @@ public class Player : MonoBehaviour
 			{
 				fountainSets[i].fountains[j].objects[0].SetActive(false);
 			}
+			fountainSets[i].otherObjs[0].SetActive(false);
 		}
 
 		for (int i = 0; i < fountainSets.Count; i++)
@@ -263,6 +272,7 @@ public class Player : MonoBehaviour
 				{
 					currentFountainSet = fountainSets[i];
 					openFountainCount = j + 1;
+					currentFountainSetLevel = i;
 					isChecked = true;
 					break;
 				}
@@ -282,6 +292,8 @@ public class Player : MonoBehaviour
 				fountainSets[i].fountains[j].objects[0].SetActive(false);
 			}
 		}
+
+		currentFountainSet.otherObjs[0].SetActive(true);
 
 		for (int i = 0; i < openFountainCount; i++)
 		{
