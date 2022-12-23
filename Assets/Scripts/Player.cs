@@ -7,6 +7,7 @@ using PathCreation;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine.UI;
+using MoreMountains.NiceVibrations;
 
 public class Player : MonoBehaviour
 {
@@ -110,14 +111,31 @@ public class Player : MonoBehaviour
 	public GameObject incomeUIButton;
 	public TextMeshProUGUI moneyForSecText;
 
+	[Header("Settings")]
+	public Settings settings;
+	public bool isVibrate = true;
+	public bool isSoundEffect = true;
+	public AudioSource sound;
+
+	[Header("Start")] 
+	public GameObject blastHandIcon;
+	public GameObject rotateHandIcon;
+
 	private float flowTime = 0;
 	private bool flowed = true;
 	private int maxFountainLevel = 0;
 	private int currentFountainSetLevel = 0;
 
+	[HideInInspector] public static Player instance { get; private set; }
+
 	private float TextedMoney(float money)
 	{
 		return (float)Math.Round((decimal)money, 2);
+	}
+
+	private void Awake()
+	{
+		if (instance == null) instance = this;
 	}
 
 	private void Start()
@@ -140,6 +158,17 @@ public class Player : MonoBehaviour
 		Load();
 
 		CheckLevels();
+
+		if (money <= 0)
+		{
+			blastHandIcon.SetActive(true);
+			rotateHandIcon.SetActive(false);
+		}
+		else
+		{
+			blastHandIcon.SetActive(false);
+			rotateHandIcon.SetActive(false);
+		}
 	}
 
 	private void Update()
@@ -150,12 +179,27 @@ public class Player : MonoBehaviour
 			StartCoroutine(FlowWater());
 		}
 
-		if (Input.touchCount != 0) currentSpeed = currentSpeedNormal * fastSpeedFactorOnTouch;
+		if (Input.touchCount != 0)
+		{
+			currentSpeed = currentSpeedNormal * fastSpeedFactorOnTouch;
+
+			if (blastHandIcon.activeInHierarchy || rotateHandIcon.activeInHierarchy)
+			{
+				Touch touch = Input.GetTouch(0);
+				if (blastHandIcon.activeInHierarchy && (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled))
+				{
+					blastHandIcon.SetActive(false);
+					rotateHandIcon.SetActive(true);
+				}
+			}
+		}
 		else currentSpeed = currentSpeedNormal;
 
 		haveMoneyText.text = TextedMoney(money).ToString();
 
 		CheckButtons();
+
+		CheckSound();
 
 		//Flow Money For Seconds
 		float moneyForSec = moneyIncomeForEachFlow * currentMoneyIncrease * (currentFountainSetLevel + 1) * openFountainCount;
@@ -173,6 +217,11 @@ public class Player : MonoBehaviour
 			{
 				rb.AddTorque(0, touch.deltaPosition.x * -rotateSpeed, 0);
 				rotatingObj.transform.rotation = rb.transform.rotation;
+			}
+
+			if (rotateHandIcon.activeInHierarchy && (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled))
+			{
+				rotateHandIcon.SetActive(false);
 			}
 		}
 	}
@@ -198,22 +247,25 @@ public class Player : MonoBehaviour
 			money += moneyAmount;
 
 			//Wait
-			yield return new WaitForSeconds(shaderOnTransitionSeconds / currentSpeed);
+			yield return new WaitForSeconds((shaderOnTransitionSeconds / currentSpeed) - 0.1f);
 
-			currentFountainSet.fountains[i].flowGroundObj.SetActive(true);
+			currentFountainSet.fountains[i].flowGroundObj.transform.GetChild(0).gameObject.SetActive(true);
 
 			//Wait
-			yield return new WaitForSeconds(flowWaitTime / currentSpeed - shaderOnTransitionSeconds / currentSpeed - shaderOffTransitionSeconds / currentSpeed);
+			yield return new WaitForSeconds(flowWaitTime / currentSpeed - ((shaderOnTransitionSeconds / currentSpeed) - 0.1f) - shaderOffTransitionSeconds / currentSpeed);
 
 			//Shader Off
 			meshFlow.material = waterfallOffMat;
 			meshFlow.material.SetFloat("_ProgressBorder", shaderOffStartValue);
 			meshFlow.material.DOFloat(shaderOffEndValue, "_ProgressBorder", shaderOffTransitionSeconds / currentSpeed);
 
+			currentFountainSet.fountains[i].flowGroundObj.GetComponent<MeshRenderer>().material.DOFloat(0, "_Transparency", shaderOffTransitionSeconds / currentSpeed);
+
 			//Wait
 			yield return new WaitForSeconds(shaderOffTransitionSeconds / currentSpeed);
 
-			currentFountainSet.fountains[i].flowGroundObj.SetActive(false);
+			currentFountainSet.fountains[i].flowGroundObj.transform.GetChild(0).gameObject.SetActive(false);
+			currentFountainSet.fountains[i].flowGroundObj.GetComponent<MeshRenderer>().material.DOFloat(1, "_Transparency", shaderOnTransitionSeconds / currentSpeed);
 		}
 
 		//Pipe On Shader
@@ -350,7 +402,7 @@ public class Player : MonoBehaviour
 		{
 			fountainLevel++;
 			money -= currentFountainLevelMoney;
-			//Vibrate();
+			GenerateVibration();
 			newItemEffect.Play();
 			CheckLevels();
 		}
@@ -363,7 +415,7 @@ public class Player : MonoBehaviour
 		{
 			speedLevel++;
 			money -= currentSpeedLevelMoney;
-			//Vibrate();
+			GenerateVibration();
 			CheckLevels();
 		}
 		Save();
@@ -375,7 +427,7 @@ public class Player : MonoBehaviour
 		{
 			incomeLevel++;
 			money -= currentIncomeLevelMoney;
-			//Vibrate();
+			GenerateVibration();
 			CheckLevels();
 		}
 		Save();
@@ -439,6 +491,12 @@ public class Player : MonoBehaviour
 		PlayerPrefs.SetInt("FountainLevel", fountainLevel);
 		PlayerPrefs.SetInt("SpeedLevel", speedLevel);
 		PlayerPrefs.SetInt("IncomeLevel", incomeLevel);
+
+		if (isSoundEffect) PlayerPrefs.SetInt("Sound", 1);
+		else PlayerPrefs.SetInt("Sound", 0);
+
+		if (isVibrate) PlayerPrefs.SetInt("Vibrate", 1);
+		else PlayerPrefs.SetInt("Vibrate", 0);
 	}
 
 	private void Load()
@@ -447,6 +505,50 @@ public class Player : MonoBehaviour
 		if(PlayerPrefs.HasKey("FountainLevel")) fountainLevel = PlayerPrefs.GetInt("FountainLevel");
 		if(PlayerPrefs.HasKey("SpeedLevel")) speedLevel = PlayerPrefs.GetInt("SpeedLevel");
 		if (PlayerPrefs.HasKey("IncomeLevel")) incomeLevel = PlayerPrefs.GetInt("IncomeLevel");
+
+		if (PlayerPrefs.HasKey("Vibrate"))
+		{
+			if (PlayerPrefs.GetInt("Vibrate") == 1)
+			{
+				isVibrate = true;
+				settings.vibrate.GetComponent<Image>().sprite = settings.vibrateOn;
+				settings.isOpenVibrate = true;
+			}
+			else
+			{
+				isVibrate = false;
+				settings.vibrate.GetComponent<Image>().sprite = settings.vibrateOff;
+				settings.isOpenVibrate = false;
+			}
+		}
+		else
+		{
+			isVibrate = true;
+			settings.vibrate.GetComponent<Image>().sprite = settings.vibrateOn;
+			settings.isOpenVibrate = true;
+		}
+
+		if (PlayerPrefs.HasKey("Sound"))
+		{
+			if (PlayerPrefs.GetInt("Sound") == 1)
+			{
+				isSoundEffect = true;
+				settings.sound.GetComponent<Image>().sprite = settings.soundOn;
+				settings.isOpenSound = true;
+			}
+			else
+			{
+				isSoundEffect = false;
+				settings.sound.GetComponent<Image>().sprite = settings.soundOff;
+				settings.isOpenSound = false;
+			}
+		}
+		else
+		{
+			isSoundEffect = true;
+			settings.sound.GetComponent<Image>().sprite = settings.soundOn;
+			settings.isOpenSound = true;
+		}
 	}
 
 	public void ResetSave()
@@ -457,6 +559,21 @@ public class Player : MonoBehaviour
 		incomeLevel = 1;
 
 		CheckLevels();
+	}
+
+	private void GenerateVibration()
+	{
+		if (!isVibrate) return;
+
+		MMVibrationManager.StopAllHaptics();
+
+		MMVibrationManager.TransientHaptic(0.85f, 0.05f, true, this);
+	}
+
+	private void CheckSound()
+	{
+		if(isSoundEffect) sound.mute = false;
+		else sound.mute = true;
 	}
 
 	private void OnApplicationQuit()
