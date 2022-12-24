@@ -98,6 +98,8 @@ Material:
     - _BUILTIN_ZWrite: 1
     - _BUILTIN_ZWriteControl: 0
     - _Blend: 3
+    - _BulgePower: 0.001
+    - _Bulge_Width: 1
     - _BumpScale: 1
     - _CastShadows: 1
     - _ClearCoatMask: 0
@@ -117,6 +119,7 @@ Material:
     - _GlossyReflections: 0
     - _Metallic: 0
     - _OcclusionStrength: 1
+    - _Panner: 0.724
     - _Parallax: 0.005
     - _ProgressBorder: 1
     - _QueueControl: 0
