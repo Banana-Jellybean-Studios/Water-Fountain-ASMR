@@ -698,7 +698,7 @@ PlayerSettings:
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
   scriptingDefineSymbols:
-    Android: OBI_ONI_SUPPORTED;MOREMOUNTAINS_NICEVIBRATIONS
+    Android: OBI_ONI_SUPPORTED;MOREMOUNTAINS_NICEVIBRATIONS;AMPLIFY_SHADER_EDITOR
     Standalone: OBI_ONI_SUPPORTED;MOREMOUNTAINS_NICEVIBRATIONS;AMPLIFY_SHADER_EDITOR
     iPhone: OBI_ONI_SUPPORTED
   additionalCompilerArguments: {}

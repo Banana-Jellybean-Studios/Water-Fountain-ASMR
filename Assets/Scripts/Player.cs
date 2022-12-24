@@ -25,9 +25,6 @@ public class Player : MonoBehaviour
 		public float pipeOnShaderStartValue;
 		public float pipeOnShaderEndValue;
 		public float pipeOnShaderTransitionSeconds;
-		public float pipeOffShaderStartValue;
-		public float pipeOffShaderEndValue;
-		public float pipeOffShaderTransitionSeconds;
 		public List<GameObject> objects;
 	}
 
@@ -80,10 +77,6 @@ public class Player : MonoBehaviour
 	private float currentSpeedLevelMoney = 50;
 	private float currentIncomeLevelMoney = 50;
 
-	[Header("Pipe Materials")]
-	public Material pipeOnMat;
-	public Material pipeOffMat;
-
 	[Header("Shader On Settings")]
 	public Material waterfallOnMat;
 	public float shaderOnStartValue = 0;
@@ -103,6 +96,7 @@ public class Player : MonoBehaviour
 	[Header("UI")]
 	public TextMeshProUGUI haveMoneyText;
 	public TextMeshProUGUI addMoneyText;
+	public TextMeshProUGUI upgradeMoneyText;
 	public TextMeshProUGUI speedMoneyText;
 	public TextMeshProUGUI incomeMoneyText;
 	public GameObject addUIButton;
@@ -268,19 +262,13 @@ public class Player : MonoBehaviour
 			currentFountainSet.fountains[i].flowGroundObj.GetComponent<MeshRenderer>().material.DOFloat(1, "_Transparency", shaderOnTransitionSeconds / currentSpeed);
 		}
 
-		//Pipe On Shader
+		//Pipe Shader
 		MeshRenderer meshPipe = currentFountainSet.fountains[openFountainCount - 1].pipeInnerObj.GetComponent<MeshRenderer>();
-		meshPipe.material = pipeOnMat;
-		meshPipe.material.SetFloat("_Fill", currentFountainSet.fountains[openFountainCount - 1].pipeOnShaderStartValue);
-		meshPipe.material.DOFloat(currentFountainSet.fountains[openFountainCount - 1].pipeOnShaderEndValue, "_Fill", currentFountainSet.fountains[openFountainCount - 1].pipeOnShaderTransitionSeconds / currentSpeed);
+		meshPipe.material.SetFloat("_Panner", currentFountainSet.fountains[openFountainCount - 1].pipeOnShaderStartValue);
+		meshPipe.material.DOFloat(currentFountainSet.fountains[openFountainCount - 1].pipeOnShaderEndValue, "_Panner", currentFountainSet.fountains[openFountainCount - 1].pipeOnShaderTransitionSeconds / currentSpeed);
 
 		//Wait
 		yield return new WaitForSeconds(currentFountainSet.fountains[openFountainCount - 1].pipeOnShaderTransitionSeconds / currentSpeed);
-
-		//Pipe Off Shader
-		meshPipe.material = pipeOffMat;
-		meshPipe.material.SetFloat("_Fill", currentFountainSet.fountains[openFountainCount - 1].pipeOffShaderStartValue);
-		meshPipe.material.DOFloat(currentFountainSet.fountains[openFountainCount - 1].pipeOffShaderEndValue, "_Fill", currentFountainSet.fountains[openFountainCount - 1].pipeOffShaderTransitionSeconds / currentSpeed);
 
 		//Flow Finish
 		flowed = true;
@@ -308,6 +296,8 @@ public class Player : MonoBehaviour
 		{
 			addMoneyText.text = "$" + TextedMoney(currentFountainLevelMoney).ToString();
 		}
+
+		upgradeMoneyText.text = "$" + TextedMoney(currentFountainLevelMoney).ToString();
 
 		if (speedLevel >= maxSpeedLevel)
 		{

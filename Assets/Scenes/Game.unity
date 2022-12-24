@@ -32111,9 +32111,6 @@ MonoBehaviour:
       pipeOnShaderStartValue: 0
       pipeOnShaderEndValue: 1
       pipeOnShaderTransitionSeconds: 1
-      pipeOffShaderStartValue: 0
-      pipeOffShaderEndValue: 1
-      pipeOffShaderTransitionSeconds: 1
       objects:
       - {fileID: 5707815242364336832}
     - flowObj: {fileID: 6789923998418605727}
@@ -32124,9 +32121,6 @@ MonoBehaviour:
       pipeOnShaderStartValue: 0
       pipeOnShaderEndValue: 1
       pipeOnShaderTransitionSeconds: 1
-      pipeOffShaderStartValue: 0
-      pipeOffShaderEndValue: 1
-      pipeOffShaderTransitionSeconds: 1
       objects:
       - {fileID: 3613043181156278050}
     - flowObj: {fileID: 1113000592329609884}
@@ -32137,9 +32131,6 @@ MonoBehaviour:
       pipeOnShaderStartValue: 0
       pipeOnShaderEndValue: 1
       pipeOnShaderTransitionSeconds: 1
-      pipeOffShaderStartValue: 0
-      pipeOffShaderEndValue: 1
-      pipeOffShaderTransitionSeconds: 1
       objects:
       - {fileID: 4810919105914366279}
     otherObjs:
@@ -32153,9 +32144,6 @@ MonoBehaviour:
       pipeOnShaderStartValue: 0
       pipeOnShaderEndValue: 1
       pipeOnShaderTransitionSeconds: 1
-      pipeOffShaderStartValue: 0
-      pipeOffShaderEndValue: 1
-      pipeOffShaderTransitionSeconds: 1
       objects:
       - {fileID: 972010096686593600}
     - flowObj: {fileID: 1662832851371521873}
@@ -32166,9 +32154,6 @@ MonoBehaviour:
       pipeOnShaderStartValue: 0
       pipeOnShaderEndValue: 1
       pipeOnShaderTransitionSeconds: 1
-      pipeOffShaderStartValue: 0
-      pipeOffShaderEndValue: 1
-      pipeOffShaderTransitionSeconds: 1
       objects:
       - {fileID: 3432871665829483458}
     - flowObj: {fileID: 6608787007184056597}
@@ -32179,9 +32164,6 @@ MonoBehaviour:
       pipeOnShaderStartValue: 0
       pipeOnShaderEndValue: 1
       pipeOnShaderTransitionSeconds: 1
-      pipeOffShaderStartValue: 0
-      pipeOffShaderEndValue: 1
-      pipeOffShaderTransitionSeconds: 1
       objects:
       - {fileID: 6628285108572238858}
     - flowObj: {fileID: 7003989271345792876}
@@ -32192,9 +32174,6 @@ MonoBehaviour:
       pipeOnShaderStartValue: 0
       pipeOnShaderEndValue: 1
       pipeOnShaderTransitionSeconds: 1
-      pipeOffShaderStartValue: 0
-      pipeOffShaderEndValue: 1
-      pipeOffShaderTransitionSeconds: 1
       objects:
       - {fileID: 2483509204913269467}
     otherObjs:
@@ -32210,17 +32189,15 @@ MonoBehaviour:
   moneyIncomeForEachFlow: 10
   fastSpeedFactorOnTouch: 1.5
   flowWaitTime: 1
-  maxSpeedLevel: 7
-  maxIncomeLevel: 7
+  maxSpeedLevel: 10
+  maxIncomeLevel: 8
   speedStartCount: 1
   incomeStartCount: 1
-  speedIncreaseByLevel: 0.1
-  incomeIncreaseByLevel: 0.5
-  fountainMoneyByLevel: 100
-  speedMoneyByLevel: 50
-  incomeMoneyByLevel: 50
-  pipeOnMat: {fileID: 2100000, guid: cc5e2738becdfab46a9702402160a5bc, type: 2}
-  pipeOffMat: {fileID: 2100000, guid: b2ab01f94851b6449ba8bd58209dc5e5, type: 2}
+  speedIncreaseByLevel: 0.075
+  incomeIncreaseByLevel: 0.25
+  fountainMoneyByLevel: 300
+  speedMoneyByLevel: 200
+  incomeMoneyByLevel: 200
   waterfallOnMat: {fileID: 2100000, guid: b6847ac469110db4abadda9da96306a7, type: 2}
   shaderOnStartValue: 1
   shaderOnEndValue: 0
@@ -32234,6 +32211,7 @@ MonoBehaviour:
   newItemEffect: {fileID: 5882893679319327638}
   haveMoneyText: {fileID: 8922735141445283859}
   addMoneyText: {fileID: 4783034524726678928}
+  upgradeMoneyText: {fileID: 151823323}
   speedMoneyText: {fileID: 1091182094}
   incomeMoneyText: {fileID: 461989690}
   addUIButton: {fileID: 4783034525747401238}
@@ -68655,7 +68633,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cc5e2738becdfab46a9702402160a5bc, type: 2}
+  - {fileID: 2100000, guid: 84d34f33c4d325e45b70af404b43d2b8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -75040,7 +75018,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b2ab01f94851b6449ba8bd58209dc5e5, type: 2}
+  - {fileID: 2100000, guid: 84d34f33c4d325e45b70af404b43d2b8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -75185,7 +75163,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cc5e2738becdfab46a9702402160a5bc, type: 2}
+  - {fileID: 2100000, guid: 84d34f33c4d325e45b70af404b43d2b8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -86215,7 +86193,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b2ab01f94851b6449ba8bd58209dc5e5, type: 2}
+  - {fileID: 2100000, guid: 84d34f33c4d325e45b70af404b43d2b8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -86257,7 +86235,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b2ab01f94851b6449ba8bd58209dc5e5, type: 2}
+  - {fileID: 2100000, guid: 84d34f33c4d325e45b70af404b43d2b8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -86496,7 +86474,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b2ab01f94851b6449ba8bd58209dc5e5, type: 2}
+  - {fileID: 2100000, guid: 84d34f33c4d325e45b70af404b43d2b8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -86608,7 +86586,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b2ab01f94851b6449ba8bd58209dc5e5, type: 2}
+  - {fileID: 2100000, guid: 84d34f33c4d325e45b70af404b43d2b8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
