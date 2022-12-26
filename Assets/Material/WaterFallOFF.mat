@@ -76,7 +76,7 @@ Material:
     - _ShoreFade: 0
     - _Smoothness: 1.5
     - _SurfaceFoamBlend: 1
-    - _Transparency: 0.25
+    - _Transparency: 1
     - _TransparencyMask: 0
     - _VoroniAgitation: 1
     - _VoroniPower: -0.55

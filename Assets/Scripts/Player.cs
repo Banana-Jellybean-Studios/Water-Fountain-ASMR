@@ -233,6 +233,8 @@ public class Player : MonoBehaviour
 			meshFlow.material = waterfallOnMat;
 			meshFlow.material.SetFloat("_ProgressBorder", shaderOnStartValue);
 			meshFlow.material.DOFloat(shaderOnEndValue, "_ProgressBorder", shaderOnTransitionSeconds / currentSpeed);
+			meshFlow.material.SetFloat("_Transparency", 1.5f);
+			meshFlow.material.DOFloat(1, "_Transparency", shaderOnTransitionSeconds / currentSpeed);
 
 			//Money
 			GameObject moneyObj = Instantiate(moneyTextEffect, currentFountainSet.fountains[i].moneyTextEffectPos.transform.position, Quaternion.Euler(0, -90, 0));
@@ -252,6 +254,8 @@ public class Player : MonoBehaviour
 			meshFlow.material = waterfallOffMat;
 			meshFlow.material.SetFloat("_ProgressBorder", shaderOffStartValue);
 			meshFlow.material.DOFloat(shaderOffEndValue, "_ProgressBorder", shaderOffTransitionSeconds / currentSpeed);
+			meshFlow.material.SetFloat("_Transparency", 1);
+			meshFlow.material.DOFloat(2, "_Transparency", shaderOnTransitionSeconds / currentSpeed);
 
 			currentFountainSet.fountains[i].flowGroundObj.GetComponent<MeshRenderer>().material.DOFloat(0, "_Transparency", shaderOffTransitionSeconds / currentSpeed);
 
