@@ -56345,8 +56345,8 @@ MonoBehaviour:
       moneyTextEffectPos: {fileID: 1360083217}
       pipe: {fileID: 8294650160620583809}
       pipeInnerObj: {fileID: 5104551923075087222}
-      pipeOnShaderStartValue: 0
-      pipeOnShaderEndValue: 1
+      pipeOnShaderStartValue: -0.1
+      pipeOnShaderEndValue: 1.1
       pipeOnShaderTransitionSeconds: 1
       objects:
       - {fileID: 5707815242364336832}
@@ -56355,8 +56355,8 @@ MonoBehaviour:
       moneyTextEffectPos: {fileID: 1902376894}
       pipe: {fileID: 4805924458992684003}
       pipeInnerObj: {fileID: 8744816219510315644}
-      pipeOnShaderStartValue: 0
-      pipeOnShaderEndValue: 1
+      pipeOnShaderStartValue: -0.1
+      pipeOnShaderEndValue: 1.1
       pipeOnShaderTransitionSeconds: 1
       objects:
       - {fileID: 3613043181156278050}
@@ -56365,8 +56365,8 @@ MonoBehaviour:
       moneyTextEffectPos: {fileID: 1592221482}
       pipe: {fileID: 2407528226832882521}
       pipeInnerObj: {fileID: 4345722359830865729}
-      pipeOnShaderStartValue: 0
-      pipeOnShaderEndValue: 1
+      pipeOnShaderStartValue: -0.1
+      pipeOnShaderEndValue: 1.1
       pipeOnShaderTransitionSeconds: 1
       objects:
       - {fileID: 4810919105914366279}
@@ -56378,8 +56378,8 @@ MonoBehaviour:
       moneyTextEffectPos: {fileID: 1395484832}
       pipe: {fileID: 1332348092073702917}
       pipeInnerObj: {fileID: 1137934293278395951}
-      pipeOnShaderStartValue: 0
-      pipeOnShaderEndValue: 1
+      pipeOnShaderStartValue: -0.1
+      pipeOnShaderEndValue: 1.1
       pipeOnShaderTransitionSeconds: 1
       objects:
       - {fileID: 972010096686593600}
@@ -56388,8 +56388,8 @@ MonoBehaviour:
       moneyTextEffectPos: {fileID: 662979336}
       pipe: {fileID: 5798131244240570257}
       pipeInnerObj: {fileID: 2425436472534127415}
-      pipeOnShaderStartValue: 0
-      pipeOnShaderEndValue: 1
+      pipeOnShaderStartValue: -0.1
+      pipeOnShaderEndValue: 1.1
       pipeOnShaderTransitionSeconds: 1
       objects:
       - {fileID: 3432871665829483458}
@@ -56398,8 +56398,8 @@ MonoBehaviour:
       moneyTextEffectPos: {fileID: 1971776398}
       pipe: {fileID: 9066366772660170691}
       pipeInnerObj: {fileID: 1690415682454229890}
-      pipeOnShaderStartValue: 0
-      pipeOnShaderEndValue: 1
+      pipeOnShaderStartValue: -0.1
+      pipeOnShaderEndValue: 1.1
       pipeOnShaderTransitionSeconds: 1
       objects:
       - {fileID: 6628285108572238858}
@@ -56408,8 +56408,8 @@ MonoBehaviour:
       moneyTextEffectPos: {fileID: 1295459889}
       pipe: {fileID: 60208586701829396}
       pipeInnerObj: {fileID: 539357274526919878}
-      pipeOnShaderStartValue: 0
-      pipeOnShaderEndValue: 1
+      pipeOnShaderStartValue: -0.1
+      pipeOnShaderEndValue: 1.1
       pipeOnShaderTransitionSeconds: 1
       objects:
       - {fileID: 2483509204913269467}
@@ -56421,8 +56421,8 @@ MonoBehaviour:
       moneyTextEffectPos: {fileID: 1657392491}
       pipe: {fileID: 6806388685504225721}
       pipeInnerObj: {fileID: 7412871918687049933}
-      pipeOnShaderStartValue: 0
-      pipeOnShaderEndValue: 1
+      pipeOnShaderStartValue: -0.1
+      pipeOnShaderEndValue: 1.1
       pipeOnShaderTransitionSeconds: 1
       objects:
       - {fileID: 2312597234828358446}
@@ -56431,8 +56431,8 @@ MonoBehaviour:
       moneyTextEffectPos: {fileID: 1924320112}
       pipe: {fileID: 7224595676419017689}
       pipeInnerObj: {fileID: 7193708923999440961}
-      pipeOnShaderStartValue: 0
-      pipeOnShaderEndValue: 1
+      pipeOnShaderStartValue: -0.1
+      pipeOnShaderEndValue: 1.1
       pipeOnShaderTransitionSeconds: 1
       objects:
       - {fileID: 2132344369785929455}
@@ -56441,8 +56441,8 @@ MonoBehaviour:
       moneyTextEffectPos: {fileID: 2011620935}
       pipe: {fileID: 4180215083718726555}
       pipeInnerObj: {fileID: 3666890456334823352}
-      pipeOnShaderStartValue: 0
-      pipeOnShaderEndValue: 1
+      pipeOnShaderStartValue: -0.1
+      pipeOnShaderEndValue: 1.1
       pipeOnShaderTransitionSeconds: 1
       objects:
       - {fileID: 3411367258787737405}
@@ -56451,8 +56451,8 @@ MonoBehaviour:
       moneyTextEffectPos: {fileID: 548783466}
       pipe: {fileID: 4189771078296092244}
       pipeInnerObj: {fileID: 1359780246032752898}
-      pipeOnShaderStartValue: 0
-      pipeOnShaderEndValue: 1
+      pipeOnShaderStartValue: -0.1
+      pipeOnShaderEndValue: 1.1
       pipeOnShaderTransitionSeconds: 1
       objects:
       - {fileID: 6318381796122619223}
@@ -56461,8 +56461,8 @@ MonoBehaviour:
       moneyTextEffectPos: {fileID: 1657815808}
       pipe: {fileID: 6843989822327207786}
       pipeInnerObj: {fileID: 3129575454144849888}
-      pipeOnShaderStartValue: 0
-      pipeOnShaderEndValue: 1
+      pipeOnShaderStartValue: -0.1
+      pipeOnShaderEndValue: 1.1
       pipeOnShaderTransitionSeconds: 1
       objects:
       - {fileID: 4871853276169275514}
@@ -56483,7 +56483,7 @@ MonoBehaviour:
   maxIncomeLevel: 8
   speedStartCount: 1
   incomeStartCount: 1
-  speedIncreaseByLevel: 0.075
+  speedIncreaseByLevel: 0.05
   incomeIncreaseByLevel: 0.25
   fountainMoneyByLevel: 300
   speedMoneyByLevel: 200
@@ -124401,10 +124401,10 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 3bc4a6463a8d6934c875ff55338de822, type: 2}
-  - {fileID: -2813467912831258332, guid: f20da800ecc064346809fcc776b8df6c, type: 3}
-  - {fileID: -8274133419916619345, guid: f20da800ecc064346809fcc776b8df6c, type: 3}
-  - {fileID: -3522955778539423533, guid: f20da800ecc064346809fcc776b8df6c, type: 3}
-  - {fileID: 2100000, guid: 01bbc9985719bf146a2385162c6709be, type: 2}
+  - {fileID: 2100000, guid: 6937af1f3353eeb448cc0d9c0789f20b, type: 2}
+  - {fileID: 2100000, guid: 0a316caadd30ce346a813582bbd6f5a6, type: 2}
+  - {fileID: 2100000, guid: 6853b2a905bc87c4e96c0da2121161ba, type: 2}
+  - {fileID: 2100000, guid: 0a316caadd30ce346a813582bbd6f5a6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -135899,10 +135899,10 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 3bc4a6463a8d6934c875ff55338de822, type: 2}
-  - {fileID: -2813467912831258332, guid: f20da800ecc064346809fcc776b8df6c, type: 3}
-  - {fileID: -8274133419916619345, guid: f20da800ecc064346809fcc776b8df6c, type: 3}
-  - {fileID: -3522955778539423533, guid: f20da800ecc064346809fcc776b8df6c, type: 3}
-  - {fileID: 2100000, guid: 01bbc9985719bf146a2385162c6709be, type: 2}
+  - {fileID: 2100000, guid: 6e854bb925787544fbe8b7a8455f3fe7, type: 2}
+  - {fileID: 2100000, guid: 0a316caadd30ce346a813582bbd6f5a6, type: 2}
+  - {fileID: 2100000, guid: 6853b2a905bc87c4e96c0da2121161ba, type: 2}
+  - {fileID: 2100000, guid: 0a316caadd30ce346a813582bbd6f5a6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -136315,10 +136315,10 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 3bc4a6463a8d6934c875ff55338de822, type: 2}
-  - {fileID: -2813467912831258332, guid: f20da800ecc064346809fcc776b8df6c, type: 3}
-  - {fileID: -8274133419916619345, guid: f20da800ecc064346809fcc776b8df6c, type: 3}
-  - {fileID: -3522955778539423533, guid: f20da800ecc064346809fcc776b8df6c, type: 3}
-  - {fileID: 2100000, guid: 01bbc9985719bf146a2385162c6709be, type: 2}
+  - {fileID: 2100000, guid: 7974c713ecc985b499f3a103dacf3a02, type: 2}
+  - {fileID: 2100000, guid: 0a316caadd30ce346a813582bbd6f5a6, type: 2}
+  - {fileID: 2100000, guid: 6853b2a905bc87c4e96c0da2121161ba, type: 2}
+  - {fileID: 2100000, guid: 0a316caadd30ce346a813582bbd6f5a6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -136708,10 +136708,10 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 3bc4a6463a8d6934c875ff55338de822, type: 2}
-  - {fileID: -2813467912831258332, guid: f20da800ecc064346809fcc776b8df6c, type: 3}
-  - {fileID: -8274133419916619345, guid: f20da800ecc064346809fcc776b8df6c, type: 3}
-  - {fileID: -3522955778539423533, guid: f20da800ecc064346809fcc776b8df6c, type: 3}
-  - {fileID: 2100000, guid: 01bbc9985719bf146a2385162c6709be, type: 2}
+  - {fileID: 2100000, guid: 5ca6c360f1b8d8d4990e7337d98a6c76, type: 2}
+  - {fileID: 2100000, guid: 0a316caadd30ce346a813582bbd6f5a6, type: 2}
+  - {fileID: 2100000, guid: 6853b2a905bc87c4e96c0da2121161ba, type: 2}
+  - {fileID: 2100000, guid: 0a316caadd30ce346a813582bbd6f5a6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -136871,10 +136871,10 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 3bc4a6463a8d6934c875ff55338de822, type: 2}
-  - {fileID: -2813467912831258332, guid: f20da800ecc064346809fcc776b8df6c, type: 3}
-  - {fileID: -8274133419916619345, guid: f20da800ecc064346809fcc776b8df6c, type: 3}
-  - {fileID: -3522955778539423533, guid: f20da800ecc064346809fcc776b8df6c, type: 3}
-  - {fileID: 2100000, guid: 01bbc9985719bf146a2385162c6709be, type: 2}
+  - {fileID: 2100000, guid: e4b42380f1553dd428889c20632af02b, type: 2}
+  - {fileID: 2100000, guid: 0a316caadd30ce346a813582bbd6f5a6, type: 2}
+  - {fileID: 2100000, guid: 6853b2a905bc87c4e96c0da2121161ba, type: 2}
+  - {fileID: 2100000, guid: 0a316caadd30ce346a813582bbd6f5a6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

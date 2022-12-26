@@ -3,7 +3,37 @@ guid: f20da800ecc064346809fcc776b8df6c
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Kolon
+    second: {fileID: 2100000, guid: 881353b29ed77bf469aee569eb324621, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Kolon.001
+    second: {fileID: 2100000, guid: bc8f5125cd3365d47a05001f264587d3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.006
+    second: {fileID: 2100000, guid: 6937af1f3353eeb448cc0d9c0789f20b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.007
+    second: {fileID: 2100000, guid: 0a316caadd30ce346a813582bbd6f5a6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.008
+    second: {fileID: 2100000, guid: 8859f52ff0056214685649c8f6febdd5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pool
+    second: {fileID: 2100000, guid: cd65308feac93c24b982941a099a66d6, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
