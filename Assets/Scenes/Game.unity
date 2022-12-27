@@ -5492,7 +5492,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &152924476
 Transform:
   m_ObjectHideFlags: 0
@@ -56428,7 +56428,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fountainSets:
   - fountains:
-    - flowObj: {fileID: 5375454431384592649}
+    - contortAlong: {fileID: 8674352932784194848}
+      flowObj: {fileID: 5375454431384592649}
       flowGroundObj: {fileID: 1409469959}
       moneyTextEffectPos: {fileID: 1360083217}
       pipe: {fileID: 8294650160620583809}
@@ -56438,7 +56439,8 @@ MonoBehaviour:
       pipeOnShaderTransitionSeconds: 1
       objects:
       - {fileID: 5707815242364336832}
-    - flowObj: {fileID: 6789923998418605727}
+    - contortAlong: {fileID: 0}
+      flowObj: {fileID: 6789923998418605727}
       flowGroundObj: {fileID: 1270123209}
       moneyTextEffectPos: {fileID: 1902376894}
       pipe: {fileID: 4805924458992684003}
@@ -56448,7 +56450,8 @@ MonoBehaviour:
       pipeOnShaderTransitionSeconds: 1
       objects:
       - {fileID: 3613043181156278050}
-    - flowObj: {fileID: 1113000592329609884}
+    - contortAlong: {fileID: 0}
+      flowObj: {fileID: 1113000592329609884}
       flowGroundObj: {fileID: 1928973951}
       moneyTextEffectPos: {fileID: 1592221482}
       pipe: {fileID: 2407528226832882521}
@@ -56461,7 +56464,8 @@ MonoBehaviour:
     otherObjs:
     - {fileID: 1122416450393933030}
   - fountains:
-    - flowObj: {fileID: 3209700324752358415}
+    - contortAlong: {fileID: 0}
+      flowObj: {fileID: 3209700324752358415}
       flowGroundObj: {fileID: 415881693}
       moneyTextEffectPos: {fileID: 1395484832}
       pipe: {fileID: 1332348092073702917}
@@ -56471,7 +56475,8 @@ MonoBehaviour:
       pipeOnShaderTransitionSeconds: 1
       objects:
       - {fileID: 972010096686593600}
-    - flowObj: {fileID: 1662832851371521873}
+    - contortAlong: {fileID: 0}
+      flowObj: {fileID: 1662832851371521873}
       flowGroundObj: {fileID: 215083940}
       moneyTextEffectPos: {fileID: 662979336}
       pipe: {fileID: 5798131244240570257}
@@ -56481,7 +56486,8 @@ MonoBehaviour:
       pipeOnShaderTransitionSeconds: 1
       objects:
       - {fileID: 3432871665829483458}
-    - flowObj: {fileID: 6608787007184056597}
+    - contortAlong: {fileID: 0}
+      flowObj: {fileID: 6608787007184056597}
       flowGroundObj: {fileID: 1886877082}
       moneyTextEffectPos: {fileID: 1971776398}
       pipe: {fileID: 9066366772660170691}
@@ -56491,7 +56497,8 @@ MonoBehaviour:
       pipeOnShaderTransitionSeconds: 1
       objects:
       - {fileID: 6628285108572238858}
-    - flowObj: {fileID: 7003989271345792876}
+    - contortAlong: {fileID: 0}
+      flowObj: {fileID: 7003989271345792876}
       flowGroundObj: {fileID: 2015411644}
       moneyTextEffectPos: {fileID: 1295459889}
       pipe: {fileID: 60208586701829396}
@@ -56504,7 +56511,8 @@ MonoBehaviour:
     otherObjs:
     - {fileID: 2320493963955704059}
   - fountains:
-    - flowObj: {fileID: 3470379808206853229}
+    - contortAlong: {fileID: 0}
+      flowObj: {fileID: 3470379808206853229}
       flowGroundObj: {fileID: 370099981}
       moneyTextEffectPos: {fileID: 1657392491}
       pipe: {fileID: 6806388685504225721}
@@ -56514,7 +56522,8 @@ MonoBehaviour:
       pipeOnShaderTransitionSeconds: 1
       objects:
       - {fileID: 2312597234828358446}
-    - flowObj: {fileID: 842719415418167091}
+    - contortAlong: {fileID: 0}
+      flowObj: {fileID: 842719415418167091}
       flowGroundObj: {fileID: 35894227}
       moneyTextEffectPos: {fileID: 1924320112}
       pipe: {fileID: 7224595676419017689}
@@ -56524,7 +56533,8 @@ MonoBehaviour:
       pipeOnShaderTransitionSeconds: 1
       objects:
       - {fileID: 2132344369785929455}
-    - flowObj: {fileID: 5122072411292195191}
+    - contortAlong: {fileID: 0}
+      flowObj: {fileID: 5122072411292195191}
       flowGroundObj: {fileID: 1578006756}
       moneyTextEffectPos: {fileID: 2011620935}
       pipe: {fileID: 4180215083718726555}
@@ -56534,7 +56544,8 @@ MonoBehaviour:
       pipeOnShaderTransitionSeconds: 1
       objects:
       - {fileID: 3411367258787737405}
-    - flowObj: {fileID: 9048094897352797966}
+    - contortAlong: {fileID: 0}
+      flowObj: {fileID: 9048094897352797966}
       flowGroundObj: {fileID: 1293017730}
       moneyTextEffectPos: {fileID: 548783466}
       pipe: {fileID: 4189771078296092244}
@@ -56544,7 +56555,8 @@ MonoBehaviour:
       pipeOnShaderTransitionSeconds: 1
       objects:
       - {fileID: 6318381796122619223}
-    - flowObj: {fileID: 3614044832356349916}
+    - contortAlong: {fileID: 0}
+      flowObj: {fileID: 3614044832356349916}
       flowGroundObj: {fileID: 372296839}
       moneyTextEffectPos: {fileID: 1657815808}
       pipe: {fileID: 6843989822327207786}
@@ -71847,6 +71859,12 @@ RectTransform:
   m_AnchoredPosition: {x: 0.00036621094, y: -192}
   m_SizeDelta: {x: 458.2798, y: 200.8035}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!198 &1350067716 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6379362601348211105, guid: c786dc25e0c729546b2dabbc61b0488b,
+    type: 3}
+  m_PrefabInstance: {fileID: 6013870950265531520}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1358020905
 GameObject:
   m_ObjectHideFlags: 0
@@ -108012,7 +108030,7 @@ Transform:
   m_GameObject: {fileID: 2070313963}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: -6.8, z: 75.9}
-  m_LocalScale: {x: 10.238045, y: 1, z: 31.992668}
+  m_LocalScale: {x: 5.0074277, y: 1, z: 25.283806}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 963194228}
@@ -136429,6 +136447,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SplashLooped
       objectReference: {fileID: 0}
+    - target: {fileID: 6379362601348211118, guid: c786dc25e0c729546b2dabbc61b0488b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6379362601348211119, guid: c786dc25e0c729546b2dabbc61b0488b,
         type: 3}
       propertyPath: m_RootOrder
@@ -137773,7 +137796,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8674352932698985124
 Transform:
   m_ObjectHideFlags: 0
@@ -142656,31 +142679,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nodes:
-  - position: {x: 3.1735241, y: 8.542297, z: -1.12591}
-    direction: {x: 1.277179, y: 8.704803, z: -1.1776904}
+  - position: {x: 2.2061236, y: 7.943207, z: -1.1592447}
+    direction: {x: 2.0603151, y: 8.693665, z: -1.1566539}
     up: {x: 0, y: 1, z: 0}
     scale: {x: 1, y: 1}
     roll: 0
-  - position: {x: 1.5386232, y: 8.704803, z: -1.1776906}
-    direction: {x: -0.3577304, y: 8.86731, z: -1.2294664}
+  - position: {x: 1.3296672, y: 8.704803, z: -1.129715}
+    direction: {x: 1.0323482, y: 8.662781, z: -1.1312419}
     up: {x: 0, y: 1, z: 0}
     scale: {x: 1, y: 1}
     roll: 0
-  - position: {x: -0.75855744, y: 2.7917783, z: -1.1279262}
-    direction: {x: -0.63564026, y: 1.6744382, z: -1.1523933}
+  - position: {x: 0.014563936, y: 7.139129, z: -1.1776898}
+    direction: {x: -0.741067, y: 5.5313406, z: -1.2294675}
+    up: {x: 0, y: 1, z: 0}
+    scale: {x: 1, y: 1}
+    roll: 0
+  - position: {x: -0.7585576, y: 2.3794253, z: -1.1279258}
+    direction: {x: -0.63564044, y: 1.2620852, z: -1.1523929}
     up: {x: 0, y: 1, z: 0}
     scale: {x: 1, y: 1}
     roll: 0
   curves:
   - n1:
-      position: {x: 3.1735241, y: 8.542297, z: -1.12591}
-      direction: {x: 1.277179, y: 8.704803, z: -1.1776904}
+      position: {x: 2.2061236, y: 7.943207, z: -1.1592447}
+      direction: {x: 2.0603151, y: 8.693665, z: -1.1566539}
       up: {x: 0, y: 1, z: 0}
       scale: {x: 1, y: 1}
       roll: 0
     n2:
-      position: {x: 1.5386232, y: 8.704803, z: -1.1776906}
-      direction: {x: -0.3577304, y: 8.86731, z: -1.2294664}
+      position: {x: 1.3296672, y: 8.704803, z: -1.129715}
+      direction: {x: 1.0323482, y: 8.662781, z: -1.1312419}
       up: {x: 0, y: 1, z: 0}
       scale: {x: 1, y: 1}
       roll: 0
@@ -142688,21 +142716,36 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   - n1:
-      position: {x: 1.5386232, y: 8.704803, z: -1.1776906}
-      direction: {x: -0.3577304, y: 8.86731, z: -1.2294664}
+      position: {x: 1.3296672, y: 8.704803, z: -1.129715}
+      direction: {x: 1.0323482, y: 8.662781, z: -1.1312419}
       up: {x: 0, y: 1, z: 0}
       scale: {x: 1, y: 1}
       roll: 0
     n2:
-      position: {x: -0.75855744, y: 2.7917783, z: -1.1279262}
-      direction: {x: -0.63564026, y: 1.6744382, z: -1.1523933}
+      position: {x: 0.014563936, y: 7.139129, z: -1.1776898}
+      direction: {x: -0.741067, y: 5.5313406, z: -1.2294675}
       up: {x: 0, y: 1, z: 0}
       scale: {x: 1, y: 1}
       roll: 0
     Changed:
       m_PersistentCalls:
         m_Calls: []
-  Length: 8.616018
+  - n1:
+      position: {x: 0.014563936, y: 7.139129, z: -1.1776898}
+      direction: {x: -0.741067, y: 5.5313406, z: -1.2294675}
+      up: {x: 0, y: 1, z: 0}
+      scale: {x: 1, y: 1}
+      roll: 0
+    n2:
+      position: {x: -0.7585576, y: 2.3794253, z: -1.1279258}
+      direction: {x: -0.63564044, y: 1.2620852, z: -1.1523929}
+      up: {x: 0, y: 1, z: 0}
+      scale: {x: 1, y: 1}
+      roll: 0
+    Changed:
+      m_PersistentCalls:
+        m_Calls: []
+  Length: 8.333569
   isLoop: 0
   CurveChanged:
     m_PersistentCalls:
@@ -142738,6 +142781,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   generated: {fileID: 152924475}
+  isSplashed: 0
   mesh: {fileID: 7814459101124295239, guid: d3768a4fc97ed854bb35b0977e0618d8, type: 3}
   material: {fileID: 2100000, guid: 845ae72f34775f444812bd1576bcc0ab, type: 2}
   rotation: {x: 0, y: 90, z: 0}
@@ -142748,6 +142792,9 @@ MonoBehaviour:
   scaleEase: 8
   moveStartDuration: 0.7
   moveSpeed: 1
+  puddle: {fileID: 8674352932698985126}
+  splash: {fileID: 1350067716}
+  effectStartDuration: 1
 --- !u!1 &8674352933200991059
 GameObject:
   m_ObjectHideFlags: 0

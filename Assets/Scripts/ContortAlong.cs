@@ -14,6 +14,7 @@ public class ContortAlong : MonoBehaviour
 
 	[HideInInspector]
 	public GameObject generated;
+	public bool isSplashed = false;
 
 	public Mesh mesh;
 	public Material material;
@@ -28,9 +29,19 @@ public class ContortAlong : MonoBehaviour
 	[SerializeField] private float moveStartDuration = 1f;
 	[SerializeField] private float moveSpeed;
 
+	[SerializeField] private ParticleSystem puddle;
+	[SerializeField] private ParticleSystem splash;
+	[SerializeField] private float effectStartDuration = 1f;
+
 	private void Start()
 	{
-		Init();
+		isSplashed = true;
+		Init(); 
+		puddle.gameObject.SetActive(true);
+		puddle.Stop();
+		splash.gameObject.SetActive(true);
+		splash.Stop();
+		Invoke("ClosePuddle", 0);
 	}
 
 	private void Update()
@@ -50,9 +61,10 @@ public class ContortAlong : MonoBehaviour
 
 	private IEnumerator Splash()
 	{
+		isSplashed = true;
 		meshBender.Source = meshBender.Source.Scale(startScale);
-
 		lerp = 0;
+		meshBender.gameObject.SetActive(true);
 
 		GameObject curObj = new GameObject();
 
@@ -68,6 +80,12 @@ public class ContortAlong : MonoBehaviour
 
 			time += Time.deltaTime;
 
+			if (time > effectStartDuration && puddle.isStopped)
+			{
+				puddle.Play();
+				splash.Play();
+			}
+
 			if (lerp < 1)
 			{
 				if (time > moveStartDuration) lerp += moveSpeed * Time.deltaTime;
@@ -78,7 +96,17 @@ public class ContortAlong : MonoBehaviour
 			else break;
 		}
 
-		Destroy(curObj);
+		Destroy(curObj); 
+		puddle.Stop();
+		splash.Stop();
+		Invoke("ClosePuddle", 0.1f);
+	}
+
+	private void ClosePuddle()
+	{
+		puddle.gameObject.SetActive(false);
+		meshBender.gameObject.SetActive(false);
+		isSplashed = false;
 	}
 
 	private void Init()

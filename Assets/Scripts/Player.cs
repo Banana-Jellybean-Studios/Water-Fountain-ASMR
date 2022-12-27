@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
 	[System.Serializable]
 	public struct Fountain
 	{
+		public ContortAlong contortAlong;
 		public GameObject flowObj;
 		public GameObject flowGroundObj;
 		public GameObject moneyTextEffectPos;
@@ -229,12 +230,14 @@ public class Player : MonoBehaviour
 			float moneyAmount = moneyIncomeForEachFlow * currentMoneyIncrease * (currentFountainSetLevel + 1);
 
 			//Shader On
-			MeshRenderer meshFlow = currentFountainSet.fountains[i].flowObj.GetComponent<MeshRenderer>();
+			/*MeshRenderer meshFlow = currentFountainSet.fountains[i].flowObj.GetComponent<MeshRenderer>();
 			meshFlow.material = waterfallOnMat;
 			meshFlow.material.SetFloat("_ProgressBorder", shaderOnStartValue);
 			meshFlow.material.DOFloat(shaderOnEndValue, "_ProgressBorder", shaderOnTransitionSeconds / currentSpeed);
 			meshFlow.material.SetFloat("_Transparency", 1.5f);
-			meshFlow.material.DOFloat(1, "_Transparency", shaderOnTransitionSeconds / currentSpeed);
+			meshFlow.material.DOFloat(1, "_Transparency", shaderOnTransitionSeconds / currentSpeed);*/
+
+			currentFountainSet.fountains[i].contortAlong.SplashWater();
 
 			//Money
 			GameObject moneyObj = Instantiate(moneyTextEffect, currentFountainSet.fountains[i].moneyTextEffectPos.transform.position, Quaternion.Euler(0, -90, 0));
@@ -242,28 +245,30 @@ public class Player : MonoBehaviour
 			moneyObj.transform.rotation = camera.transform.rotation;
 			money += moneyAmount;
 
-			//Wait
-			yield return new WaitForSeconds((shaderOnTransitionSeconds / currentSpeed) - 0.1f);
-
-			currentFountainSet.fountains[i].flowGroundObj.transform.GetChild(0).gameObject.SetActive(true);
+			yield return new WaitUntil(() => !currentFountainSet.fountains[i].contortAlong.isSplashed);
 
 			//Wait
-			yield return new WaitForSeconds(flowWaitTime / currentSpeed - ((shaderOnTransitionSeconds / currentSpeed) - 0.1f) - shaderOffTransitionSeconds / currentSpeed);
+			//yield return new WaitForSeconds((shaderOnTransitionSeconds / currentSpeed) - 0.1f);
+
+			//currentFountainSet.fountains[i].flowGroundObj.transform.GetChild(0).gameObject.SetActive(true);
+
+			//Wait
+			//yield return new WaitForSeconds(flowWaitTime / currentSpeed - ((shaderOnTransitionSeconds / currentSpeed) - 0.1f) - shaderOffTransitionSeconds / currentSpeed);
 
 			//Shader Off
-			meshFlow.material = waterfallOffMat;
+			/*meshFlow.material = waterfallOffMat;
 			meshFlow.material.SetFloat("_ProgressBorder", shaderOffStartValue);
 			meshFlow.material.DOFloat(shaderOffEndValue, "_ProgressBorder", shaderOffTransitionSeconds / currentSpeed);
 			meshFlow.material.SetFloat("_Transparency", 1);
-			meshFlow.material.DOFloat(2, "_Transparency", shaderOnTransitionSeconds / currentSpeed);
+			meshFlow.material.DOFloat(2, "_Transparency", shaderOnTransitionSeconds / currentSpeed);*/
 
-			currentFountainSet.fountains[i].flowGroundObj.GetComponent<MeshRenderer>().material.DOFloat(0, "_Transparency", shaderOffTransitionSeconds / currentSpeed);
+			//currentFountainSet.fountains[i].flowGroundObj.GetComponent<MeshRenderer>().material.DOFloat(0, "_Transparency", shaderOffTransitionSeconds / currentSpeed);
 
 			//Wait
-			yield return new WaitForSeconds(shaderOffTransitionSeconds / currentSpeed);
+			//yield return new WaitForSeconds(shaderOffTransitionSeconds / currentSpeed);
 
-			currentFountainSet.fountains[i].flowGroundObj.transform.GetChild(0).gameObject.SetActive(false);
-			currentFountainSet.fountains[i].flowGroundObj.GetComponent<MeshRenderer>().material.DOFloat(1, "_Transparency", shaderOnTransitionSeconds / currentSpeed);
+			/*currentFountainSet.fountains[i].flowGroundObj.transform.GetChild(0).gameObject.SetActive(false);
+			currentFountainSet.fountains[i].flowGroundObj.GetComponent<MeshRenderer>().material.DOFloat(1, "_Transparency", shaderOnTransitionSeconds / currentSpeed);*/
 		}
 
 		//Pipe Shader
