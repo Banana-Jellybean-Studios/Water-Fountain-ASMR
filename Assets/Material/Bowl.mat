@@ -131,7 +131,7 @@ Material:
     - _RimAlpha: 0
     - _RimDropOff: 0
     - _RimPower: 0
-    - _Smoothness: 0.558
+    - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -139,9 +139,9 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 1, g: 0.4575472, b: 1, a: 1}
-    - _Color: {r: 1, g: 0.4575472, b: 1, a: 1}
-    - _EmissionColor: {r: 0.35686275, g: 0, b: 1, a: 1}
+    - _BaseColor: {r: 0.9450981, g: 0.22352943, b: 0.43137258, a: 1}
+    - _Color: {r: 0.9450981, g: 0.2235294, b: 0.43137255, a: 1}
+    - _EmissionColor: {r: 0.0055742804, g: 0.0025880588, b: 0.0017917331, a: 1}
     - _FresnelColor: {r: 1, g: 1, b: 1, a: 1}
     - _HighColor: {r: 1, g: 1, b: 1, a: 1}
     - _LowColor: {r: 1, g: 1, b: 1, a: 1}

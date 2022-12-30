@@ -8,6 +8,8 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine.UI;
 using MoreMountains.NiceVibrations;
+using System.Net.PeerToPeer.Collaboration;
+using SplineMesh;
 
 public class Player : MonoBehaviour
 {
@@ -227,48 +229,16 @@ public class Player : MonoBehaviour
 
 		for (int i = openFountainCount - 1; i > -1; i--)
 		{
-			float moneyAmount = moneyIncomeForEachFlow * currentMoneyIncrease * (currentFountainSetLevel + 1);
-
-			//Shader On
-			/*MeshRenderer meshFlow = currentFountainSet.fountains[i].flowObj.GetComponent<MeshRenderer>();
-			meshFlow.material = waterfallOnMat;
-			meshFlow.material.SetFloat("_ProgressBorder", shaderOnStartValue);
-			meshFlow.material.DOFloat(shaderOnEndValue, "_ProgressBorder", shaderOnTransitionSeconds / currentSpeed);
-			meshFlow.material.SetFloat("_Transparency", 1.5f);
-			meshFlow.material.DOFloat(1, "_Transparency", shaderOnTransitionSeconds / currentSpeed);*/
-
 			currentFountainSet.fountains[i].contortAlong.SplashWater();
 
 			//Money
+			float moneyAmount = moneyIncomeForEachFlow * currentMoneyIncrease * (currentFountainSetLevel + 1);
 			GameObject moneyObj = Instantiate(moneyTextEffect, currentFountainSet.fountains[i].moneyTextEffectPos.transform.position, Quaternion.Euler(0, -90, 0));
 			moneyObj.GetComponent<TextMeshPro>().text = "$" + TextedMoney(moneyAmount).ToString();
 			moneyObj.transform.rotation = camera.transform.rotation;
 			money += moneyAmount;
 
-			yield return new WaitUntil(() => !currentFountainSet.fountains[i].contortAlong.isSplashed);
-
-			//Wait
-			//yield return new WaitForSeconds((shaderOnTransitionSeconds / currentSpeed) - 0.1f);
-
-			//currentFountainSet.fountains[i].flowGroundObj.transform.GetChild(0).gameObject.SetActive(true);
-
-			//Wait
-			//yield return new WaitForSeconds(flowWaitTime / currentSpeed - ((shaderOnTransitionSeconds / currentSpeed) - 0.1f) - shaderOffTransitionSeconds / currentSpeed);
-
-			//Shader Off
-			/*meshFlow.material = waterfallOffMat;
-			meshFlow.material.SetFloat("_ProgressBorder", shaderOffStartValue);
-			meshFlow.material.DOFloat(shaderOffEndValue, "_ProgressBorder", shaderOffTransitionSeconds / currentSpeed);
-			meshFlow.material.SetFloat("_Transparency", 1);
-			meshFlow.material.DOFloat(2, "_Transparency", shaderOnTransitionSeconds / currentSpeed);*/
-
-			//currentFountainSet.fountains[i].flowGroundObj.GetComponent<MeshRenderer>().material.DOFloat(0, "_Transparency", shaderOffTransitionSeconds / currentSpeed);
-
-			//Wait
-			//yield return new WaitForSeconds(shaderOffTransitionSeconds / currentSpeed);
-
-			/*currentFountainSet.fountains[i].flowGroundObj.transform.GetChild(0).gameObject.SetActive(false);
-			currentFountainSet.fountains[i].flowGroundObj.GetComponent<MeshRenderer>().material.DOFloat(1, "_Transparency", shaderOnTransitionSeconds / currentSpeed);*/
+			yield return new WaitUntil(() => currentFountainSet.fountains[i].contortAlong.isSplashed);
 		}
 
 		//Pipe Shader
@@ -282,6 +252,69 @@ public class Player : MonoBehaviour
 		//Flow Finish
 		flowed = true;
 	}
+
+	/* Old Flow Loop
+	 
+		 for (int i = openFountainCount - 1; i > -1; i--)
+			{
+				float moneyAmount = moneyIncomeForEachFlow * currentMoneyIncrease * (currentFountainSetLevel + 1);
+	
+				//Shader On
+				MeshRenderer meshFlow = currentFountainSet.fountains[i].flowObj.GetComponent<MeshRenderer>();
+				meshFlow.material = waterfallOnMat;
+				meshFlow.material.SetFloat("_ProgressBorder", shaderOnStartValue);
+				meshFlow.material.DOFloat(shaderOnEndValue, "_ProgressBorder", shaderOnTransitionSeconds / currentSpeed);
+				meshFlow.material.SetFloat("_Transparency", 1.5f);
+				meshFlow.material.DOFloat(1, "_Transparency", shaderOnTransitionSeconds / currentSpeed);
+	
+		currentFountainSet.fountains[i].contortAlong.SplashWater();
+	
+				//Money
+				GameObject moneyObj = Instantiate(moneyTextEffect, currentFountainSet.fountains[i].moneyTextEffectPos.transform.position, Quaternion.Euler(0, -90, 0));
+		moneyObj.GetComponent<TextMeshPro>().text = "$" + TextedMoney(moneyAmount).ToString();
+		moneyObj.transform.rotation = camera.transform.rotation;
+				money += moneyAmount;
+	
+				yield return new WaitUntil(() => !currentFountainSet.fountains[i].contortAlong.isSplashed);
+	
+		//Wait
+		//yield return new WaitForSeconds((shaderOnTransitionSeconds / currentSpeed) - 0.1f);
+	
+		//currentFountainSet.fountains[i].flowGroundObj.transform.GetChild(0).gameObject.SetActive(true);
+	
+		//Wait
+		//yield return new WaitForSeconds(flowWaitTime / currentSpeed - ((shaderOnTransitionSeconds / currentSpeed) - 0.1f) - shaderOffTransitionSeconds / currentSpeed);
+	
+		//Shader Off
+		meshFlow.material = waterfallOffMat;
+		meshFlow.material.SetFloat("_ProgressBorder", shaderOffStartValue);
+		meshFlow.material.DOFloat(shaderOffEndValue, "_ProgressBorder", shaderOffTransitionSeconds / currentSpeed);
+		meshFlow.material.SetFloat("_Transparency", 1);
+		meshFlow.material.DOFloat(2, "_Transparency", shaderOnTransitionSeconds / currentSpeed);
+	
+		//currentFountainSet.fountains[i].flowGroundObj.GetComponent<MeshRenderer>().material.DOFloat(0, "_Transparency", shaderOffTransitionSeconds / currentSpeed);
+	
+		//Wait
+		//yield return new WaitForSeconds(shaderOffTransitionSeconds / currentSpeed);
+	
+		currentFountainSet.fountains[i].flowGroundObj.transform.GetChild(0).gameObject.SetActive(false);
+		currentFountainSet.fountains[i].flowGroundObj.GetComponent<MeshRenderer>().material.DOFloat(1, "_Transparency", shaderOnTransitionSeconds / currentSpeed);
+	}
+
+	*/
+
+	/*private void ResetFountains()
+	{
+		StopAllCoroutines();
+
+		for (int i = openFountainCount - 1; i > -1; i--)
+		{
+			currentFountainSet.fountains[i].contortAlong.StopAllCoroutines();
+			//currentFountainSet.fountains[i].contortAlong.CloseSplash();
+		}
+
+		flowed = true;
+	}*/
 
 	private void CheckLevels()
 	{
@@ -404,6 +437,8 @@ public class Player : MonoBehaviour
 			GenerateVibration();
 			newItemEffect.Play();
 			CheckLevels();
+			//ResetFountains();
+			flowed = true;
 		}
 		Save();
 	}
@@ -416,6 +451,7 @@ public class Player : MonoBehaviour
 			money -= currentSpeedLevelMoney;
 			GenerateVibration();
 			CheckLevels();
+			flowed = true;
 		}
 		Save();
 	}
@@ -428,6 +464,7 @@ public class Player : MonoBehaviour
 			money -= currentIncomeLevelMoney;
 			GenerateVibration();
 			CheckLevels();
+			flowed = true;
 		}
 		Save();
 	}
@@ -558,6 +595,7 @@ public class Player : MonoBehaviour
 		incomeLevel = 1;
 
 		CheckLevels();
+		//ResetFountains();
 	}
 
 	private void GenerateVibration()
