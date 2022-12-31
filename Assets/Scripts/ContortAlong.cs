@@ -42,6 +42,7 @@ public class ContortAlong : MonoBehaviour
 		splash.gameObject.SetActive(true);
 		splash.Stop();
 		Invoke("ClosePuddle", 0);
+		meshBender.gameObject.SetActive(true);
 	}
 
 	private void Update()
@@ -56,6 +57,7 @@ public class ContortAlong : MonoBehaviour
 	[ContextMenu("SplashWater")]
 	public void SplashWater()
 	{
+		StopAllCoroutines();
 		StartCoroutine(Splash());
 	}
 
@@ -63,11 +65,9 @@ public class ContortAlong : MonoBehaviour
 	{
 		GameObject curObj = new GameObject();
 		isSplashed = false;
-		meshBender.Source = meshBender.Source.Scale(startScale);
 		lerp = 0;
 		curObj.transform.localScale = startScale;
-
-		meshBender.gameObject.SetActive(true);
+		meshBender.Source = meshBender.Source.Scale(startScale);
 
 		curObj.transform.DOScale(targetScale, scaleDuration).SetEase(scaleEase);
 		meshBender.Source = meshBender.Source.Scale(curObj.transform.localScale);
@@ -106,11 +106,20 @@ public class ContortAlong : MonoBehaviour
 		puddle.Stop();
 		splash.Stop();
 		isSplashed = true;
-		meshBender.Source.Scale(startScale);
+		meshBender.Source = meshBender.Source.Scale(Vector3.one * 0.001f);
 		Invoke("ClosePuddle", 0.1f);
 	}
 
-	public void CloseSplash()
+	private IEnumerator CloseSplash()
+	{
+		while (true)
+		{
+			yield return new WaitForFixedUpdate();
+			meshBender.Source = meshBender.Source.Scale(Vector3.one * 0.001f);
+		}
+	}
+
+	/*public void CloseSplash()
 	{
 		isSplashed = true;
 		meshBender.Source = meshBender.Source.Scale(startScale);
@@ -119,11 +128,12 @@ public class ContortAlong : MonoBehaviour
 		puddle.Stop();
 		splash.Stop();
 		ClosePuddle();
-	}
+	}*/
 
 	private void ClosePuddle()
 	{
 		puddle.gameObject.SetActive(false);
+		StartCoroutine(CloseSplash());
 		//meshBender.gameObject.SetActive(false);
 	}
 

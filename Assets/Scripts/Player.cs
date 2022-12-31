@@ -120,6 +120,7 @@ public class Player : MonoBehaviour
 
 	private float flowTime = 0;
 	private bool flowed = true;
+	private bool isReset = false;
 	private int maxFountainLevel = 0;
 	private int currentFountainSetLevel = 0;
 
@@ -173,6 +174,7 @@ public class Player : MonoBehaviour
 		if (flowed)
 		{
 			StopAllCoroutines();
+			isReset = false;
 			StartCoroutine(FlowWater());
 		}
 
@@ -238,13 +240,19 @@ public class Player : MonoBehaviour
 			moneyObj.transform.rotation = camera.transform.rotation;
 			money += moneyAmount;
 
-			yield return new WaitUntil(() => currentFountainSet.fountains[i].contortAlong.isSplashed);
+			if (isReset) yield break;
+
+			yield return new WaitUntil(() => currentFountainSet.fountains[i].contortAlong.isSplashed || isReset);
+
+			if (isReset) yield break;
 		}
 
 		//Pipe Shader
 		MeshRenderer meshPipe = currentFountainSet.fountains[openFountainCount - 1].pipeInnerObj.GetComponent<MeshRenderer>();
 		meshPipe.material.SetFloat("_Panner", currentFountainSet.fountains[openFountainCount - 1].pipeOnShaderStartValue);
 		meshPipe.material.DOFloat(currentFountainSet.fountains[openFountainCount - 1].pipeOnShaderEndValue, "_Panner", currentFountainSet.fountains[openFountainCount - 1].pipeOnShaderTransitionSeconds / currentSpeed);
+
+		if (isReset) yield break;
 
 		//Wait
 		yield return new WaitForSeconds(currentFountainSet.fountains[openFountainCount - 1].pipeOnShaderTransitionSeconds / currentSpeed);
@@ -367,15 +375,6 @@ public class Player : MonoBehaviour
 		{
 			for (int j = 0; j < fountainSets[i].fountains.Count; j++)
 			{
-				fountainSets[i].fountains[j].objects[0].SetActive(false);
-			}
-			fountainSets[i].otherObjs[0].SetActive(false);
-		}
-
-		for (int i = 0; i < fountainSets.Count; i++)
-		{
-			for (int j = 0; j < fountainSets[i].fountains.Count; j++)
-			{
 				if (fountainLevel <= checkLevel)
 				{
 					currentFountainSet = fountainSets[i];
@@ -395,17 +394,23 @@ public class Player : MonoBehaviour
 
 		for (int i = 0; i < fountainSets.Count; i++)
 		{
-			for (int j = 0; j < fountainSets[i].fountains.Count; j++)
+			if (!fountainSets[i].Equals(currentFountainSet))
 			{
-				fountainSets[i].fountains[j].objects[0].SetActive(false);
+				for (int j = 0; j < fountainSets[i].fountains.Count; j++)
+				{
+					fountainSets[i].fountains[j].objects[0].SetActive(false);
+				}
+				fountainSets[i].otherObjs[0].SetActive(false);
 			}
-		}
-
-		currentFountainSet.otherObjs[0].SetActive(true);
-
-		for (int i = 0; i < openFountainCount; i++)
-		{
-			currentFountainSet.fountains[i].objects[0].SetActive(true);
+			else
+			{
+				for (int j = 0; j < fountainSets[i].fountains.Count; j++)
+				{
+					if(j < openFountainCount) fountainSets[i].fountains[j].objects[0].SetActive(true);
+					else fountainSets[i].fountains[j].objects[0].SetActive(false);
+				}
+				fountainSets[i].otherObjs[0].SetActive(true);
+			}
 		}
 
 		//Pipe
@@ -439,6 +444,7 @@ public class Player : MonoBehaviour
 			CheckLevels();
 			//ResetFountains();
 			flowed = true;
+			isReset = true;
 		}
 		Save();
 	}
