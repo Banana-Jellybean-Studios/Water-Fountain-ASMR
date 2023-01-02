@@ -10,6 +10,7 @@ using UnityEngine.UI;
 using MoreMountains.NiceVibrations;
 using System.Net.PeerToPeer.Collaboration;
 using SplineMesh;
+using static Unity.VisualScripting.Member;
 
 public class Player : MonoBehaviour
 {
@@ -38,9 +39,12 @@ public class Player : MonoBehaviour
 	public GameObject rotatingObj;
 	public Rigidbody rb;
 	[SerializeField] private float rotateSpeed = 10;
+	[SerializeField] private Transform openPos;
+	[SerializeField] private Transform closePos;
 
-	private int openFountainCount;
+	[HideInInspector] public int openFountainCount;
 	private FountainSet currentFountainSet;
+	private FountainSet lastFountainSet;
 
 	[Header("Stats")]
 	public float money = 0;
@@ -123,8 +127,9 @@ public class Player : MonoBehaviour
 	private bool isReset = false;
 	private int maxFountainLevel = 0;
 	private int currentFountainSetLevel = 0;
+	[HideInInspector] public int checkFountainCount = 0; //For error on splash
 
-	[HideInInspector] public static Player instance { get; private set; }
+	[HideInInspector] public static Player player { get; private set; }
 
 	private float TextedMoney(float money)
 	{
@@ -133,7 +138,7 @@ public class Player : MonoBehaviour
 
 	private void Awake()
 	{
-		if (instance == null) instance = this;
+		if (player == null) player = this;
 	}
 
 	private void Start()
@@ -167,6 +172,10 @@ public class Player : MonoBehaviour
 			blastHandIcon.SetActive(false);
 			rotateHandIcon.SetActive(false);
 		}
+
+		if (checkFountainCount != openFountainCount) checkFountainCount = openFountainCount;
+
+		lastFountainSet = currentFountainSet;
 	}
 
 	private void Update()
@@ -229,7 +238,7 @@ public class Player : MonoBehaviour
 	{
 		flowed = false;
 
-		for (int i = openFountainCount - 1; i > -1; i--)
+		for (int i = checkFountainCount - 1; i > -1; i--)
 		{
 			currentFountainSet.fountains[i].contortAlong.SplashWater();
 
@@ -248,17 +257,24 @@ public class Player : MonoBehaviour
 		}
 
 		//Pipe Shader
-		MeshRenderer meshPipe = currentFountainSet.fountains[openFountainCount - 1].pipeInnerObj.GetComponent<MeshRenderer>();
-		meshPipe.material.SetFloat("_Panner", currentFountainSet.fountains[openFountainCount - 1].pipeOnShaderStartValue);
-		meshPipe.material.DOFloat(currentFountainSet.fountains[openFountainCount - 1].pipeOnShaderEndValue, "_Panner", currentFountainSet.fountains[openFountainCount - 1].pipeOnShaderTransitionSeconds / currentSpeed);
+		MeshRenderer meshPipe = currentFountainSet.fountains[checkFountainCount - 1].pipeInnerObj.GetComponent<MeshRenderer>();
+		meshPipe.material.SetFloat("_Panner", currentFountainSet.fountains[checkFountainCount - 1].pipeOnShaderStartValue);
+		meshPipe.material.DOFloat(currentFountainSet.fountains[checkFountainCount - 1].pipeOnShaderEndValue, "_Panner", currentFountainSet.fountains[checkFountainCount - 1].pipeOnShaderTransitionSeconds / currentSpeed);
 
 		if (isReset) yield break;
 
 		//Wait
-		yield return new WaitForSeconds(currentFountainSet.fountains[openFountainCount - 1].pipeOnShaderTransitionSeconds / currentSpeed);
+		yield return new WaitForSeconds(currentFountainSet.fountains[checkFountainCount - 1].pipeOnShaderTransitionSeconds / currentSpeed);
 
 		//Flow Finish
 		flowed = true;
+
+		if (checkFountainCount != openFountainCount) checkFountainCount = openFountainCount;
+	}
+
+	public void CheckCount()
+	{
+		if (checkFountainCount != openFountainCount) checkFountainCount = openFountainCount;
 	}
 
 	/* Old Flow Loop
@@ -310,19 +326,6 @@ public class Player : MonoBehaviour
 	}
 
 	*/
-
-	/*private void ResetFountains()
-	{
-		StopAllCoroutines();
-
-		for (int i = openFountainCount - 1; i > -1; i--)
-		{
-			currentFountainSet.fountains[i].contortAlong.StopAllCoroutines();
-			//currentFountainSet.fountains[i].contortAlong.CloseSplash();
-		}
-
-		flowed = true;
-	}*/
 
 	private void CheckLevels()
 	{
@@ -398,18 +401,24 @@ public class Player : MonoBehaviour
 			{
 				for (int j = 0; j < fountainSets[i].fountains.Count; j++)
 				{
-					fountainSets[i].fountains[j].objects[0].SetActive(false);
+					if(j == 0) fountainSets[i].fountains[j].objects[0].SetActive(true);
+					else fountainSets[i].fountains[j].objects[0].SetActive(false);
 				}
-				fountainSets[i].otherObjs[0].SetActive(false);
+				fountainSets[i].otherObjs[0].transform.position = closePos.position;
 			}
 			else
 			{
 				for (int j = 0; j < fountainSets[i].fountains.Count; j++)
 				{
-					if(j < openFountainCount) fountainSets[i].fountains[j].objects[0].SetActive(true);
+					if (j < openFountainCount)
+					{
+						fountainSets[i].fountains[j].objects[0].SetActive(true);
+						fountainSets[i].fountains[j].contortAlong.Init();
+					}
+					
 					else fountainSets[i].fountains[j].objects[0].SetActive(false);
 				}
-				fountainSets[i].otherObjs[0].SetActive(true);
+				fountainSets[i].otherObjs[0].transform.position = openPos.position;
 			}
 		}
 
@@ -442,9 +451,9 @@ public class Player : MonoBehaviour
 			GenerateVibration();
 			newItemEffect.Play();
 			CheckLevels();
-			//ResetFountains();
-			flowed = true;
+			ResetFountains();
 			isReset = true;
+			flowed = true;
 		}
 		Save();
 	}
@@ -457,6 +466,7 @@ public class Player : MonoBehaviour
 			money -= currentSpeedLevelMoney;
 			GenerateVibration();
 			CheckLevels();
+			ResetFountains();
 			flowed = true;
 		}
 		Save();
@@ -470,9 +480,46 @@ public class Player : MonoBehaviour
 			money -= currentIncomeLevelMoney;
 			GenerateVibration();
 			CheckLevels();
+			ResetFountains();
 			flowed = true;
 		}
 		Save();
+	}
+
+	private void ResetFountains()
+	{
+		/*if (!lastFountainSet.Equals(currentFountainSet))
+		{
+			isReset = true;
+
+			for (int i = openFountainCount - 1; i > -1; i--)
+			{
+				currentFountainSet.fountains[i].contortAlong.StopAllCoroutines();
+				currentFountainSet.fountains[i].contortAlong.RestartObject();
+			}
+
+			flowed = true;
+
+			lastFountainSet = currentFountainSet;
+
+			if (checkFountainCount != openFountainCount) checkFountainCount = openFountainCount;
+
+			Debug.Log("Different fountain set");
+		}
+		else
+		{
+			for (int i = openFountainCount - 1; i > -1; i--)
+			{
+				currentFountainSet.fountains[i].contortAlong.CloseMesh();
+			}
+		}*/
+
+		if (checkFountainCount != openFountainCount) checkFountainCount = openFountainCount;
+
+		for (int i = openFountainCount - 1; i > -1; i--)
+		{
+			currentFountainSet.fountains[i].contortAlong.CloseMesh();
+		}
 	}
 
 	private void CheckButtons()

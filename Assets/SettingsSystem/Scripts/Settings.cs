@@ -35,7 +35,7 @@ public class Settings : MonoBehaviour
         sound.anchoredPosition = settingsTarget.anchoredPosition;*/
         isOpenSettings = false;
         settingsPanel.SetActive(false);
-        character = Player.instance;
+        character = Player.player;
 	}
 
     public void OpenCloseSettings()
